@@ -1,0 +1,29 @@
+{
+  "name": "kozackiefury",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "server": "env-cmd -f ./config/dev.env nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adkidus/kozackiefury.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adkidus/kozackiefury/issues"
+  },
+  "homepage": "https://github.com/Adkidus/kozackiefury#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.1",
+    "nodemon": "^2.0.15"
+  }
+}
