@@ -10,7 +10,6 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
         unique: true,
         trim: true,
         lowercase: true
@@ -20,6 +19,21 @@ const UserSchema = new Schema({
         required: true
     },
     phone: String,
+    company_name: {
+        type: String,
+    },
+    nip: {
+        type: String,
+    },
+    address: {
+        ype: String,
+    },
+    postalCode: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
     active: { 
         type: Boolean,
         default: true

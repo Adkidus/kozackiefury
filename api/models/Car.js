@@ -13,16 +13,38 @@ const CarSchema = new Schema({
     horse_power: {
         type: String
     },
+    drive_type: {
+        type: String
+    },
     engine: {
+        type: String
+    },
+    gearbox: {
         type: String
     },
     to_100: {
         type: Number
     },
-    gearbox: {
-        type: String
-    },
+    main_photo: String,
+    photos: [String],
+    services: [
+        {
+            time: {
+                type: Number
+            },
+            name: {
+                type: String
+            },
+            description: {
+                type: String
+            }
+        }
+    ],
     active: { 
+        type: Boolean,
+        default: false
+    },
+    canceled: {
         type: Boolean,
         default: false
     },
