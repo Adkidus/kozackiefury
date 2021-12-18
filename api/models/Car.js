@@ -13,20 +13,21 @@ const CarSchema = new Schema({
     horse_power: {
         type: String
     },
-    drive_type: {
-        type: String
-    },
     engine: {
         type: String
     },
-    gearbox: {
+    to_100: {
         type: String
     },
-    to_100: {
-        type: Number
-    },
     main_photo: String,
-    photos: [String],
+    photos: [{
+        key: {
+            type: String
+        },
+        location: {
+            type: String
+        }
+    }],
     services: [
         {
             time: {
@@ -51,7 +52,6 @@ const CarSchema = new Schema({
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
     },
 }, {
     timestamps: true
