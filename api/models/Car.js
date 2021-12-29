@@ -19,6 +19,7 @@ const CarSchema = new Schema({
     to_100: {
         type: String
     },
+    description: String,
     main_photo: String,
     photos: [{
         key: {
@@ -33,7 +34,7 @@ const CarSchema = new Schema({
             time: {
                 type: Number
             },
-            name: {
+            title: {
                 type: String
             },
             description: {
