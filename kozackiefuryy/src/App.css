@@ -15,7 +15,7 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;  
   background-color: #000;
-  color:#b19d7f;
+  color:#e5bc42;
 }
 
 .main{
@@ -46,10 +46,10 @@ h3{
 
 .timer-el{
   font-size: 1.5rem;
-  border: 1px solid #b19d7f;
+  border: 1px solid #e5bc42;
   padding: 1.75rem;
   border-radius: 10px;
-  background-color: #b19d7f;
+  background-color: #e5bc42;
   color: #fff;
   width: 6rem;
 }

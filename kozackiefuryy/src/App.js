@@ -9,7 +9,7 @@ const App = () => {
   let timerInterval;
   const [timeToEnd, setTimeToEnd] = useState([{name: 'dni', time: 0},{name: 'godzin', time: 0},{name: 'minut', time: 0},{name: 'sekund', time: 0}])
 
-  const finalDate = '12/18/2021 12:00';
+  const finalDate = '01/01/2022 18:00';
   const counterDown = () => {
     let end = new Date(finalDate);
     let now = new Date();
