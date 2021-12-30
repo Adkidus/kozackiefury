@@ -32,7 +32,7 @@ const CarSchema = new Schema({
     services: [
         {
             time: {
-                type: Number
+                type: String
             },
             title: {
                 type: String
@@ -50,10 +50,10 @@ const CarSchema = new Schema({
         type: Boolean,
         default: false
     },
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
+    owner_first_name: String,
+    owner_last_name: String,
+    owner_email: String,
+    owner_phone: String
 }, {
     timestamps: true
 });

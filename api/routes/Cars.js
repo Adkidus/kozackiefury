@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 const multer = require('multer')
 const multerS3 = require('multer-s3')
 const aws = require('../config/aws');
+const Car = require('../models/Car');
 
 const upload = multer({
     storage: multerS3({
@@ -21,13 +22,13 @@ const upload = multer({
             "image/jpeg": ".jpeg",
             "image/jpg": ".jpg"
         };
-        let fileName = Date.now().toString()+makeid(5)+fileObj[file.mimetype];
-        cb(null, 'cars/'+fileName)
+        let fileName = Date.now().toString()+fileObj[file.mimetype];
+        cb(null, fileName)
       }
     })
 })
 
-router.post('/newCar', auth, async (req, res) => {
+router.post('/newCar', async (req, res) => {
     try {
         let newCar = req.body;
         const car = new Car(newCar)
@@ -38,7 +39,7 @@ router.post('/newCar', auth, async (req, res) => {
     }
 })
 
-router.post('/uploadImage/:carId', auth, upload.array('fileUpload',3), async(req, res) => {
+router.post('/uploadImage/:carId', upload.array('fileUpload',1), async(req, res) => {
     const car = await Car.findOne({_id: req.params.carId})
     car.photos.push({key: req.files[0].key, location: req.files[0].location})
     try {
@@ -59,9 +60,10 @@ router.post('/update', auth, async(req, res) => {
     }
 })
 
-router.get('/list', auth, async (req, res) => {
+router.get('/list', async (req, res) => {
     try {
-        
+        let cars = await Car.find({})
+        res.status(200).json(cars); 
     } catch (error) {
         res.status(500).json({msg:'Error: ' + e.message});
     }

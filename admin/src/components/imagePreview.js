@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 
-const ImagePreview = () => {
-    const [{alt, src}, setImg] = useState({
+const ImagePreview = forwardRef((props, ref) => {
+    const fileInput = React.createRef();
+    const [{alt, src, file}, setImg] = useState({
         src: '',
         alt: 'Upload an Image'
     });
     const idEl = Math.random();
-
+    useImperativeHandle(ref, () => ({
+        image: file
+      }));
     const handleImg = (e) => {
         if(e.target.files[0]) {
             setImg({
                 src: URL.createObjectURL(e.target.files[0]),
-                alt: e.target.files[0].name
+                alt: e.target.files[0].name,
+                file: e.target.files[0]
             });    
         }   
     }
@@ -28,6 +32,7 @@ const ImagePreview = () => {
                 id={'photo-' + idEl} 
                 className="visually-hidden"
                 onChange={handleImg}
+                ref={fileInput}
             />
             <label htmlFor={'photo-' + idEl}  style={{padding:'.5rem',background:'#b19d7f',color:'#fff',fontSize:'.75rem',cursor:'pointer'}}>
                 WYBIERZ ZDJECIE
@@ -35,6 +40,6 @@ const ImagePreview = () => {
            
         </div>
     );
-}
+})
 
 export default ImagePreview;
