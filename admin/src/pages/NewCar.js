@@ -6,7 +6,7 @@ import axios from 'axios';
 import ModalApp from '../components/modal';
 import { useNavigate } from 'react-router-dom';
 // const API_URL = 'http://localhost:5000/';
-const API_URL = 'http://api.kozackiefury.pl:33205/';
+const API_URL = 'https://api.kozackiefury.pl/';
 
 const NewCar = () => {
     const navigate = useNavigate()
