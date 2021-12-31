@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap');
+
+@import './colors';
+@import './buttons';
+@import './navbar';
+@import './header';
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dark-bg{
+    background-color: #0c0c0c;
+    background-image: linear-gradient(#0c0c0c,#212121);
+    color: $white;
+}
+
+.home-cars{
+    h3{
+        color: $gold;
+    }
+}
