@@ -3,6 +3,7 @@
     padding: 16px 24px;
     font-size: 14px;
     font-weight: 600;
+    outline: 0 !important;
     &-gold{
         background-color: $gold;
         color: $white;
@@ -11,6 +12,13 @@
         &:hover{
             background-color: $gold-hover; 
             border-color: $gold-hover;
+            outline: none;
+        }
+        &:focus{
+            background-color: $gold;
+            color: $white;
+            border-color: $gold;
+            outline: 0 !important;
         }
     }
 }

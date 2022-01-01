@@ -6,12 +6,14 @@ import CarsSlider from '../components/cars/CarsSlider';
 const Home = () => {
     return(<>
         <Header />
-        <Container fluid className='dark-bg home-cars' style={{padding:'64px', display: 'flex', justifyContent:'center', flexFlow:'column', alignItems: 'center'}}>
-            <h3>
-                NASZE SAMOCHODY
-            </h3>
-            <CarsSlider />
-        </Container>
+        <section id="carsList">
+            <Container fluid className='dark-bg home-cars' style={{padding:'64px', display: 'flex', justifyContent:'center', flexFlow:'column', alignItems: 'center'}}>
+                <h3>
+                    NASZE SAMOCHODY
+                </h3>
+                <CarsSlider />
+            </Container>
+        </section>
     </>)
 }
 
