@@ -1,0 +1,35 @@
+.car-card{
+    background: none;
+    border: 1px solid $gold;
+    border-radius: 0;
+    &__price{
+        position: absolute;
+    }
+    &__header{
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        font-weight: bold;
+        &-brand{
+            color: $gold;
+        }
+    }
+    &__details{
+        display: flex;
+        width: 100%;
+        justify-content:space-between;
+
+        &--item{
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            padding: .5rem;
+
+            &-header{
+                color: $gold;
+            }
+        }
+    }
+}

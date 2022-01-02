@@ -8,17 +8,39 @@
         background-color: $gold;
         color: $white;
         border-color: $gold;
-
+        box-shadow: none;
         &:hover{
             background-color: $gold-hover; 
             border-color: $gold-hover;
-            outline: none;
+            outline: 0 !important;
+            box-shadow: none;
         }
         &:focus{
             background-color: $gold;
             color: $white;
             border-color: $gold;
             outline: 0 !important;
+            box-shadow: none;
+        }
+    }
+    &-gold-outline{
+        background: transparent;
+        color: $white;
+        border-color: $gold;
+        box-shadow: none;
+        &:hover{
+            background: transparent;
+            border-color: $gold-hover;
+            outline: 0 !important;
+            box-shadow: none;
+            color: $gold;
+        }
+        &:focus{
+            background: transparent;
+            color: $white;
+            border-color: $gold;
+            outline: 0 !important;
+            box-shadow: none;
         }
     }
 }

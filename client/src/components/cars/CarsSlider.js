@@ -33,7 +33,7 @@ const CarsSlider = () => {
         <Container>
             <Row>
                 <Col xs={12}>
-                    <Carousel id="carsListCaroysel" indicators={false} controls={true} slide={false}>
+                    <Carousel id="carsListCaroysel" indicators={false} controls={cars.length>3} slide={false}>
                         {carsData.map((el,index) => (
                             <Carousel.Item key={index}>
                                 <Row>

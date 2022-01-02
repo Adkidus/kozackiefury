@@ -34,6 +34,7 @@ const CarSchema = new Schema({
             time: {
                 type: String
             },
+            price: String,
             title: {
                 type: String
             },

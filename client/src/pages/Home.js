@@ -8,7 +8,7 @@ const Home = () => {
         <Header />
         <section id="carsList">
             <Container fluid className='dark-bg home-cars' style={{padding:'64px', display: 'flex', justifyContent:'center', flexFlow:'column', alignItems: 'center'}}>
-                <h3>
+                <h3 className='mb-3'>
                     NASZE SAMOCHODY
                 </h3>
                 <CarsSlider />

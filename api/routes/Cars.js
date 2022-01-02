@@ -69,4 +69,13 @@ router.get('/list', async (req, res) => {
     }
 })
 
+router.get('/car/:carId', async (req, res) => {
+    try {
+        const car = await Car.findOne({_id: req.params.carId})
+        res.status(200).json(car); 
+    } catch (error) {
+        res.status(500).json({msg:'Error: ' + e.message});
+    }
+})
+
 module.exports = router;
