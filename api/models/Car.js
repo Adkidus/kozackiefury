@@ -20,6 +20,7 @@ const CarSchema = new Schema({
         type: String
     },
     description: String,
+    category: String,
     main_photo: String,
     photos: [{
         key: {

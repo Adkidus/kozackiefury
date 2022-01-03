@@ -18,6 +18,7 @@ const NewCar = () => {
         engine: '',
         to_100: '',
         description: '',
+        category: '',
         owner_first_name: '',
         owner_last_name: '',
         owner_email: '',
@@ -134,6 +135,17 @@ const NewCar = () => {
                             onChange={e=>setCarInfo({...carInfo,...{to_100: e.target.value}})}
                         />
                         <label htmlFor="floatingInputCustom">0-100km/h (sekundy)</label>
+                    </Form.Floating>
+                </Col>
+                <Col md={6} className="mb-3">
+                    <Form.Floating >
+                        <Form.Select onChange={e=>setCarInfo({...carInfo,...{category: e.target.value}})}>
+                            <option></option>
+                            <option value="Fast&Furious">Fast&Furious</option>
+                            <option value="Luxury&Business">Luxury&Business</option>
+                            <option value="Retro&Soul">Retro&Soul</option>
+                        </Form.Select>
+                        <label htmlFor="floatingInputCustom">Kategoria</label>
                     </Form.Floating>
                 </Col>
                 <Col md={12} className="mb-3">
