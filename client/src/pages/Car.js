@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
+import Service from '../components/cars/Service';
 
 const API_URL = 'https://api.kozackiefury.pl/';
 
@@ -38,17 +39,19 @@ const Car = () => {
                     <div className='my-4'>
                         {car.description}
                     </div>
-                    <Row>
-
-                    </Row>
                 </section>
                 <section className='pt-4'>
                     <h5 style={{color:'#e5bc42'}}>OFERTA&nbsp;&nbsp;🔥</h5>
+                    <div className='my-4'>
+                        <Row>
+                            {car.services.map(service  => <Service key={service._id} service={service} />)}
+                        </Row>
+                    </div>
                 </section>
                 <section className='pt-4'>
                     <h5 style={{color:'#e5bc42'}}>GALERIA&nbsp;&nbsp;📷</h5>
                     <div className='gallery my-4'>
-                        {car.photos.map(photo => <img key={photo._id} src={photo.location} loading='lazy' />)}
+                        {car.photos.map(photo => <img key={photo._id} src={photo.location} alt="gallery-image" loading='lazy' />)}
                     </div>
                 </section>
             </Container>
