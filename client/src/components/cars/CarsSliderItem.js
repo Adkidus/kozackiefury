@@ -17,7 +17,7 @@ const CarsSliderItem = ({car}) => {
             <Card.Body>
                 <Card.Title>
                     <div className='car-card__header'>
-                        <div className='car-card__header-brand mb-1'>{car.brand}</div>
+                        <div className='car-card__header-brand mb-1' style={{textTransform:'uppercase'}}>{car.brand}</div>
                         <div className='car-card__header-model mb-3'>{car.model}</div>    
                     </div>
                 </Card.Title>

@@ -38,13 +38,18 @@ const Car = () => {
                     <div className='my-4'>
                         {car.description}
                     </div>
+                    <Row>
+
+                    </Row>
                 </section>
                 <section className='pt-4'>
                     <h5 style={{color:'#e5bc42'}}>OFERTA&nbsp;&nbsp;🔥</h5>
                 </section>
                 <section className='pt-4'>
                     <h5 style={{color:'#e5bc42'}}>GALERIA&nbsp;&nbsp;📷</h5>
-                    
+                    <div className='gallery my-4'>
+                        {car.photos.map(photo => <img key={photo._id} src={photo.location} loading='lazy' />)}
+                    </div>
                 </section>
             </Container>
         </Container>
