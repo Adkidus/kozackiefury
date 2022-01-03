@@ -35,7 +35,7 @@ const CarsList = () => {
                             <Card.Text>
                                 Właściciel: {car.owner_first_name} {car.owner_last_name}
                             </Card.Text>
-                            <Link to={'/car/'+car._id}>
+                            <Link to={'/auto/'+car._id}>
                                 <Button variant="primary">Edytuj</Button>
                             </Link>
                         </Card.Body>

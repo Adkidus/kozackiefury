@@ -212,11 +212,11 @@ const NewCar = () => {
                     <ImagePreview id="image4" ref={image4} />
                 </Col>
                 <Col md={12} style={{paddingBottom: "1rem", paddingTop: "2rem"}}>
-                    Usługi
+                    Oferta
                 </Col>
                 <hr />
                 {services.map((el,index) => <Row key={index}>
-                    <Service title={el.title} time={el.time} price={el.price} desc={el.description} index={index} setService={setService} deleteService={deleteService} />
+                    <Service title={el.title} time={el.time} price={el.price} description={el.description} index={index} setService={setService} deleteService={deleteService} />
                     <hr />
                 </Row> )}
                 <Button onClick={addService}>Dodaj kolejną</Button>

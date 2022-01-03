@@ -50,10 +50,10 @@ router.post('/uploadImage/:carId', upload.array('fileUpload',1), async(req, res)
     }
 });
 
-router.post('/update', auth, async(req, res) => {
+router.post('/update', async(req, res) => {
     try {
         await Car.updateOne({_id: req.body._id},req.body);
-        carUpdated = await Car.findOne({_id: req.params._id});
+        carUpdated = await Car.findOne({_id: req.body._id});
         res.status(200).json(carUpdated); 
     } catch (e) {
         res.status(500).json({msg:'Error: ' + e.message});
