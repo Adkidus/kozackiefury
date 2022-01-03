@@ -33,6 +33,7 @@ const NewCar = () => {
         arr.push({
             title: '',
             time: '',
+            price: '',
             description: ''
         })
         setServices(arr)
@@ -215,7 +216,7 @@ const NewCar = () => {
                 </Col>
                 <hr />
                 {services.map((el,index) => <Row key={index}>
-                    <Service title={el.title} time={el.time} desc={el.description} index={index} setService={setService} deleteService={deleteService} />
+                    <Service title={el.title} time={el.time} price={el.price} desc={el.description} index={index} setService={setService} deleteService={deleteService} />
                     <hr />
                 </Row> )}
                 <Button onClick={addService}>Dodaj kolejną</Button>

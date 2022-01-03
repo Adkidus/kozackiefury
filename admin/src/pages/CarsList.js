@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Col, Card, Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 import axios from 'axios';
 // const API_URL = 'http://localhost:5000/';
 const API_URL = 'https://api.kozackiefury.pl/';
@@ -34,7 +35,9 @@ const CarsList = () => {
                             <Card.Text>
                                 Właściciel: {car.owner_first_name} {car.owner_last_name}
                             </Card.Text>
-                            <Button variant="primary">Edytuj</Button>
+                            <Link to={'/car/'+car._id}>
+                                <Button variant="primary">Edytuj</Button>
+                            </Link>
                         </Card.Body>
                     </Card>
                 </Col>

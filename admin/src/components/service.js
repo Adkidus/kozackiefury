@@ -1,15 +1,15 @@
 import React from 'react';
 import {Col, Form, FloatingLabel, Button} from 'react-bootstrap'
 
-const Service = ({title, time, description, setService, deleteService, index}) => {
+const Service = ({title, time, price, description, setService, deleteService, index}) => {
     const update = (name,value) => {
-        let arr = {title: title, time: time, description: description}
+        let arr = {title: title, time: time, price: price, description: description}
         arr[name]=value;
         setService(index, arr)
     }
     return(
         <>
-            <Col md={6}>
+            <Col md={4}>
                 <Form.Floating className="mb-3">
                     <Form.Control
                         type="text"
@@ -20,7 +20,7 @@ const Service = ({title, time, description, setService, deleteService, index}) =
                     <label htmlFor="floatingInputCustom">Nazwa</label>
                 </Form.Floating>
             </Col>
-            <Col md={6} className="mb-3">
+            <Col md={4} className="mb-3">
                 <Form.Floating >
                     <Form.Control
                         type="text"
@@ -29,6 +29,17 @@ const Service = ({title, time, description, setService, deleteService, index}) =
                         onChange={e=>update('time',e.target.value)}
                     />
                     <label htmlFor="floatingInputCustom">Czas</label>
+                </Form.Floating>
+            </Col>
+            <Col md={4} className="mb-3">
+                <Form.Floating >
+                    <Form.Control
+                        type="text"
+                        placeholder="cena"
+                        value={price}
+                        onChange={e=>update('price',e.target.value)}
+                    />
+                    <label htmlFor="floatingInputCustom">Cena</label>
                 </Form.Floating>
             </Col>
             <Col md={12} className="mb-3">
