@@ -7,9 +7,15 @@ const Service = ({service}) => {
         <Card className="car-card">
             <Card.Body>
                 <div style={{display:'flex',flexFlow:'column',gap:'1rem',justifyContent:'center',alignItems:'center'}}>
-                    <div>NAZWA</div>
-                    <div>CZAS</div>
-                    <div>CENA</div>
+                    <div style={{textAlign:'center'}}>
+                        {service.title}
+                    </div>
+                    <div style={{textAlign:'center'}}>
+                        {service.time}
+                    </div>
+                    <div style={{textAlign:'center'}}>
+                        {service.price}
+                    </div>
                 </div>
                 <Button className='btn-gold w-100 mt-4'>WYBIERAM</Button>
             </Card.Body>

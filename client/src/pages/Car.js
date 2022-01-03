@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import Service from '../components/cars/Service';
 
 const API_URL = 'https://api.kozackiefury.pl/';
@@ -36,8 +36,30 @@ const Car = () => {
             <Container className='py-5'>
                 <section>
                     <h5 style={{color:'#e5bc42'}}>O SAMOCHODZIE&nbsp;&nbsp;🔥</h5>
-                    <div className='my-4'>
+                    <div className='mt-2'>
                         {car.description}
+                    </div>
+                    <div className='mt-4 mb-4'>
+                        <Row>
+                            <Col xs={4}>
+                                <div className='py-3' style={{background:'#e5bc42',width:'100%',display:'flex',flexFlow:'column',justifyContent: 'center',alignItems: 'center',gap:'.5rem'}}>
+                                    <div style={{fontWeight:'600',fontSize:'1rem'}}>SILNIK</div>
+                                    <div style={{fontWeight:'bold',fontSize:'1.5rem'}}>{car.engine}</div>
+                                </div>
+                            </Col>
+                            <Col xs={4}>
+                                <div className='py-3' style={{background:'#e5bc42',width:'100%',display:'flex',flexFlow:'column',justifyContent: 'center',alignItems: 'center',gap:'.5rem'}}>
+                                    <div style={{fontWeight:'600',fontSize:'1rem'}}>MOC</div>
+                                    <div style={{fontWeight:'bold',fontSize:'1.5rem'}}>{car.horse_power} KM</div>
+                                </div>
+                            </Col>
+                            <Col xs={4}>
+                                <div className='py-3' style={{background:'#e5bc42',width:'100%',display:'flex',flexFlow:'column',justifyContent: 'center',alignItems: 'center',gap:'.5rem'}}>
+                                    <div style={{fontWeight:'600',fontSize:'1rem'}}>100KM/H</div>
+                                    <div style={{fontWeight:'bold',fontSize:'1.5rem'}}>{car.to_100} s</div>
+                                </div>
+                            </Col>
+                        </Row>
                     </div>
                 </section>
                 <section className='pt-4'>

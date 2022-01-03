@@ -1,5 +1,8 @@
 .navbar-brand{
-    color: $gold !important;
-    text-transform: uppercase;
-    font-weight: bold;
+    a{
+        color: $gold !important;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-decoration: none;
+    }
 }
