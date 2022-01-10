@@ -71,11 +71,22 @@ router.get('/list', async (req, res) => {
     }
 })
 
-router.get('/car/:carId', async (req, res) => {
+router.get('/carById/:carId', async (req, res) => {
     try {
         const car = await Car.findOne({_id: req.params.carId})
         res.status(200).json(car); 
-    } catch (error) {
+    } catch (e) {
+        res.status(500).json({msg:'Error: ' + e.message});
+    }
+})
+
+router.get('/car/:pathName', async (req, res) => {
+    try {
+        const thisCar = await Car.findOne({pathName: req.params.pathName})
+        if(!thisCar)
+            return res.status(404).send('NOT FOUND'); 
+        res.status(200).json(thisCar); 
+    } catch (e) {
         res.status(500).json({msg:'Error: ' + e.message});
     }
 })

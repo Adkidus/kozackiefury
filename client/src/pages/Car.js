@@ -1,25 +1,33 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Service from '../components/cars/Service';
 
-const API_URL = 'https://api.kozackiefury.pl/';
+// const API_URL = 'https://api.kozackiefury.pl/';
+const API_URL = 'http://localhost:5000/';
 
 const Car = () => {
     const params = useParams();
     const [car, setCar] = useState(null)
     const [header, setHeader] = useState('')
     const [loading, setLoading] = useState(true)
+    const [fullImage, setFullImage] = useState(null)
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get(`${API_URL}cars/car/${params.caId}`)
         .then(res => {
-            let thisCar = res.data
-            setCar(thisCar);
-            let photos = thisCar.photos;
-            let photo = photos.length > 0 ? photos[0].location : '';
-            setHeader(photo)
-            setLoading(false)
+                let thisCar = res.data
+                setCar(thisCar);
+                let photos = thisCar.photos;
+                let photo = photos.length > 0 ? photos[0].location : '';
+                setHeader(photo)
+                setLoading(false)
+        })
+        .catch(e => {
+            navigate('/404')
         })
     }, [])
     return(<>
@@ -35,7 +43,7 @@ const Car = () => {
         <Container fluid className='dark-bg home-cars'>
             <Container className='py-5'>
                 <section>
-                    <h5 style={{color:'#e5bc42'}}>O SAMOCHODZIE&nbsp;&nbsp;🔥</h5>
+                    <h5 style={{color:'#e5bc42'}}>O SAMOCHODZIE</h5>
                     <div className='mt-2'>
                         {car.description}
                     </div>
@@ -63,7 +71,7 @@ const Car = () => {
                     </div>
                 </section>
                 <section className='pt-4'>
-                    <h5 style={{color:'#e5bc42'}}>OFERTA&nbsp;&nbsp;🔥</h5>
+                    <h5 style={{color:'#e5bc42'}}>OFERTA</h5>
                     <div className='my-4'>
                         <Row>
                             {car.services.map(service  => <Service key={service._id} service={service} />)}
@@ -71,11 +79,16 @@ const Car = () => {
                     </div>
                 </section>
                 <section className='pt-4'>
-                    <h5 style={{color:'#e5bc42'}}>GALERIA&nbsp;&nbsp;📷</h5>
+                    <h5 style={{color:'#e5bc42'}}>GALERIA</h5>
                     <div className='gallery my-4'>
-                        {car.photos.map(photo => <img key={photo._id} src={photo.location} alt="gallery-image" loading='lazy' />)}
+                        {car.photos.map(photo => <img key={photo._id} src={photo.location} alt="gallery-img" loading='lazy' onClick={()=>setFullImage(photo.location)} />)}
                     </div>
                 </section>
+                {fullImage ? <div className='full-page' style={{backgroundImage:`url(${fullImage})`}}>
+                    <div style={{position: 'absolute',top:'1rem',right: '1rem',fontSize:'2.5rem',cursor:'pointer'}} onClick={()=>setFullImage(null)}>
+                        <FontAwesomeIcon icon={faTimes} />
+                    </div>
+                </div>:''}
             </Container>
         </Container>
         </>: ''}

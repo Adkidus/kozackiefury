@@ -19,7 +19,34 @@ body {
 }
 
 .home-cars{
+    h1{
+        font-weight: 700;
+        color: $gold;
+    }
     h3{
         color: $gold;
     }
+}
+
+.full-page{
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+    background-color: black;
+}
+
+.order-form{
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.9);
 }

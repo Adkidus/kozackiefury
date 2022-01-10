@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Card, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import {Link} from 'react-router-dom'
+import OrderForm from '../OrderForm';
 
 const CarsSliderItem = ({car}) => {
+    let [displayForm, setDisplaForm] = useState(false)
     let photos = car.photos;
     let photo = photos.length > 0 ? photos[0].location : '';
     return(<Col md={4} className="mb-3"> 
@@ -36,15 +36,18 @@ const CarsSliderItem = ({car}) => {
                     </div>
                 </div>
                 <div>
-                    <Link to={'/car/'+car._id}>
+                    <Link to={'/car/'+car.pathName}>
                         <Button className='btn-gold-outline w-100 mb-1 mt-4'>
-                            <FontAwesomeIcon icon={faArrowRight} />
+                            POZNAJ MNIE
                         </Button>
                     </Link>
-                    <Button className='btn-gold w-100 my-3'>REZERWUJ</Button>
+                    <Button className='btn-gold w-100 my-3' onClick={()=>setDisplaForm(true)}>
+                        PRZEJEDŹMY SIĘ
+                    </Button>
                 </div>
             </Card.Body>
         </Card>
+        {displayForm?<OrderForm car={car} />:''}
     </Col>)
 }
 
