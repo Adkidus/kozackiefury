@@ -36,8 +36,7 @@ const ImagePreview = forwardRef((props, ref) => {
             />
             <label htmlFor={'photo-' + idEl}  style={{padding:'.5rem',background:'#b19d7f',color:'#fff',fontSize:'.75rem',cursor:'pointer'}}>
                 WYBIERZ ZDJECIE
-            </label>
-           
+            </label>           
         </div>
     );
 })

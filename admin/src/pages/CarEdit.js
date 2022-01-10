@@ -4,13 +4,16 @@ import axios from 'axios';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import Service from '../components/service'
 import ImagePreview from '../components/imagePreview';
+import ModalApp from '../components/modal';
 
-const API_URL = 'http://localhost:5000/';
-// const API_URL = 'https://api.kozackiefury.pl/';
+// const API_URL = 'http://localhost:5000/';
+const API_URL = 'https://api.kozackiefury.pl/';
 
 const CarEdit = () => {
     const params = useParams();
     const [car, setCar] = useState(null)
+    const [modalShow, setModalShow] = useState(false)
+    const [photoToDelete, setPhotoToDelete] = useState(null)
     const image1 = useRef();
     const image2 = useRef();
     const image3 = useRef();
@@ -37,6 +40,38 @@ const CarEdit = () => {
         .then(res => {
             alert('zapisano')
         })
+    }
+    const deleteImage = () => {
+        let photo = photoToDelete;
+        let thisCar = {...car}
+        let photoslist = [...car.photos]
+        photoslist = photoslist.filter(obj => obj._id !== photo._id)
+        thisCar.photos = [...photoslist]
+        let toDelete = {
+            car: thisCar,
+            photokey: photo.key
+        }
+        axios.post(`${API_URL}cars/deleteImage`,toDelete)
+        .then(res => {
+            if(res.status === 200)
+                setCar(thisCar)
+        })
+    }
+    const uploadImages = () => {
+        let id = car._id;
+        if(image1.current.image)
+            updateImage(id, image1.current.image)
+        if(image2.current.image)
+            updateImage(id, image2.current.image)
+        if(image3.current.image)
+            updateImage(id, image3.current.image)
+        if(image4.current.image)
+            updateImage(id, image4.current.image)
+    }
+    const updateImage= (id, img) => {
+        let formData = new FormData();
+        formData.append("fileUpload", img);
+        axios.post(`${API_URL}cars/uploadImage/${id}`,formData)
     }
     return(<>
         {car ? <>
@@ -104,9 +139,9 @@ const CarEdit = () => {
                                 </Form.Floating>
                             </Col>
                             <Col md={12} style={{paddingBottom:'.75rem',paddingTop:'1.75rem'}}>
-                                <div style={{display: 'flex',width:"100%",justifyContent:"space-between"}}>
-                                    <Button variant='danger'>Anuluj</Button>
-                                    <Button variant='success'>Zapisz</Button>
+                                <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
+                                    {/* <Button variant='danger'>Anuluj</Button> */}
+                                    <Button variant='success' onClick={save}>Zapisz</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -163,9 +198,9 @@ const CarEdit = () => {
                                 </Form.Floating>
                             </Col>
                             <Col md={12} style={{paddingBottom:'.75rem',paddingTop:'1.75rem'}}>
-                                <div style={{display: 'flex',width:"100%",justifyContent:"space-between"}}>
-                                    <Button variant='danger'>Anuluj</Button>
-                                    <Button variant='success'>Zapisz</Button>
+                                <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
+                                    {/* <Button variant='danger'>Anuluj</Button> */}
+                                    <Button variant='success' onClick={save}>Zapisz</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -177,22 +212,31 @@ const CarEdit = () => {
                             Zdjęcia
                             </Col>
                             <hr />
-                            <Col md={3} className="mb-3">
-                                <ImagePreview id="image1" ref={image1} />
-                            </Col>
-                            <Col md={3} className="mb-3">
-                                <ImagePreview id="image2" ref={image2} />
-                            </Col>
-                            <Col md={3} className="mb-3">
-                                <ImagePreview id="image3" ref={image3} />
-                            </Col>
-                            <Col md={3} className="mb-3">
-                                <ImagePreview id="image4" ref={image4} />
-                            </Col>
+                            {[...Array(4)].map((e,i)=>{
+                                let photo = car.photos[i];
+                                if(!photo){
+                                    return <Col key={i} md={3} className="mb-3">
+                                        <ImagePreview 
+                                            id={'image4' + i} 
+                                            ref={
+                                                i===0?image1:
+                                                i===1?image2:
+                                                i===2?image3:
+                                                i===3?image4:''} />
+                                    </Col>
+                                }else{
+                                    return <Col key={i} md={3} className="mb-3">
+                                        <img src={photo.location} alt={photo.key} className="form-img__img-preview" style={{width:'80%', maxHeight: '250px', objectFit: 'contain'}}/>
+                                        <Button variant='danger'  style={{padding:'.5rem',fontSize:'.75rem', borderRadius:0, border:0}} onClick={()=>{setPhotoToDelete(photo);setModalShow(true)}}>
+                                            USUŃ ZDJECIE
+                                        </Button>
+                                    </Col>
+                                }
+                            })}
                             <Col md={12} style={{paddingBottom:'.75rem',paddingTop:'1.75rem'}}>
-                                <div style={{display: 'flex',width:"100%",justifyContent:"space-between"}}>
-                                    <Button variant='danger'>Anuluj</Button>
-                                    <Button variant='success'>Zapisz</Button>
+                                <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
+                                    {/* <Button variant='danger'>Anuluj</Button> */}
+                                    <Button variant='success' onClick={uploadImages}>Zapisz</Button>
                                 </div>
                             </Col>
                         </Row>
@@ -209,10 +253,10 @@ const CarEdit = () => {
                                 <Service title={el.title} time={el.time} price={el.price} description={el.description} index={index} setService={setService} deleteService={deleteService} />
                             </Row> )}
                             <Col md={12} style={{paddingBottom:'.75rem'}}>
-                                <div style={{display: 'flex',width:"100%",justifyContent:"space-between"}}>
-                                    <Link to="/">
+                                <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
+                                    {/* <Link to="/">
                                         <Button variant='danger'>Anuluj</Button>
-                                    </Link>
+                                    </Link> */}
                                     <Button variant='success' onClick={save}>Zapisz</Button>
                                 </div>
                             </Col>
@@ -221,6 +265,13 @@ const CarEdit = () => {
 
                 </Row>
             </Form>
+            <ModalApp
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                header=''
+                body={`Czy napewno chcesz usunąć to zdjęcie?`}
+                footer={<div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}><Button variant='danger' onClick={()=>{setPhotoToDelete(null);setModalShow(false)}}>Anuluj</Button><Button variant='success' onClick={deleteImage}>Tak, usuń!</Button></div>}
+            />
         </>
         :'LOADING'}
     </>)

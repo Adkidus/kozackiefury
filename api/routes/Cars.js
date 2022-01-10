@@ -78,4 +78,21 @@ router.get('/car/:carId', async (req, res) => {
     }
 })
 
+router.post('/deleteImage', async (req, res) => {
+    try {
+        aws.s3.deleteObject({
+            Bucket: aws.bucket,
+            Key: req.body.photokey
+        }, function(err, data) {
+            if (err)  
+                res.status(500).json(err);
+        });
+        await Car.updateOne({_id: req.body.car._id},req.body.car);
+        carUpdated = await Car.findOne({_id: req.body.car._id});
+        res.status(200).json(carUpdated); 
+    } catch (e) {
+        res.status(500).json({msg:'Error: ' + e.message});
+    }
+})
+
 module.exports = router;
