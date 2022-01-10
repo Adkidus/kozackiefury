@@ -25,19 +25,32 @@ const Header = () => {
 
     return(
         <Row style={{marginBottom: '2rem'}}>
-            <Col md={4} style={column} >
-                <Link to="/" style={{textDecoration: 'none'}}>
-                    <div style={linkText}>
-                        FLOTA
-                    </div>
-                </Link>
+            <Col md={4}>
+                <div style={column}>
+                    <Link to="/" style={{textDecoration: 'none'}}>
+                        <div style={linkText}>
+                            FLOTA
+                        </div>
+                    </Link>
+                </div>
             </Col>
-            <Col md={{ span: 4, offset: 4 }} style={column}>
-                <Link to="/dodaj-auto" style={{textDecoration: 'none'}}>
-                    <div style={linkText}>
-                        DODAJ
-                    </div>
-                </Link>
+            <Col md={4} >
+                <div style={column}>
+                    <Link to="/dodaj-auto" style={{textDecoration: 'none'}}>
+                        <div style={linkText}>
+                            DODAJ
+                        </div>
+                    </Link>
+                </div>
+            </Col>
+            <Col md={4}>
+                <div style={column}>
+                    <Link to="/dodaj-auto" style={{textDecoration: 'none'}}>
+                        <div style={linkText}>
+                            OFERTY
+                        </div>
+                    </Link>
+                </div>
             </Col>
         </Row>
     )

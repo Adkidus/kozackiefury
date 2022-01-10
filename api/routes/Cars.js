@@ -31,7 +31,7 @@ const upload = multer({
 router.post('/newCar', async (req, res) => {
     try {
         let newCar = req.body;
-        let carPathName = `${newCar.brand} ${newCar.model}}`;
+        let carPathName = `${newCar.brand} ${newCar.model}`;
         newCar.pathName = carPathName.toLowerCase().split(' ').join('-')
         const car = new Car(newCar)
         await car.save()

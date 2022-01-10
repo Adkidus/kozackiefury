@@ -36,6 +36,10 @@ const CarEdit = () => {
         setCar({...car,...{services: arr}})
     }
     const save = () => {
+        // let thisCar = {...car};
+        // thisCar.photos[1].location = "https://kozackiefury.s3.eu-central-1.amazonaws.com/1640941901374.webp"
+        // thisCar.photos[1].key = "1640941901374.webp"
+        // console.log(thisCar)
         axios.post(`${API_URL}cars/update`,car)
         .then(res => {
             alert('zapisano')
