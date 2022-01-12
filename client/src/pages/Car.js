@@ -85,7 +85,7 @@ const Car = () => {
                     </div>
                 </section>
                 {fullImage ? <div className='full-page' style={{backgroundImage:`url(${fullImage})`}}>
-                    <div style={{position: 'absolute',top:'1rem',right: '1rem',fontSize:'2.5rem',cursor:'pointer'}} onClick={()=>setFullImage(null)}>
+                    <div style={{position: 'absolute',top:'1rem',right: '1rem',fontSize:'1.75rem',cursor:'pointer'}} onClick={()=>setFullImage(null)}>
                         <FontAwesomeIcon icon={faTimes} />
                     </div>
                 </div>:''}

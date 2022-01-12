@@ -7,7 +7,7 @@ const CarsSliderItem = ({car}) => {
     let [displayForm, setDisplaForm] = useState(false)
     let photos = car.photos;
     let photo = photos.length > 0 ? photos[0].location : '';
-    return(<Col md={4} className="mb-3"> 
+    return(<Col lg={4} md={6} className="mb-3"> 
         <Card className="car-card">
             {/* <div className='car-card__price'>
                 <div>Cena</div>
