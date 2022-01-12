@@ -1,13 +1,10 @@
 import React, {useState,useEffect} from 'react'
-import axios from 'axios';
+import axiosConfig from '../utils/axiosConfig';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import Service from '../components/cars/Service';
-
-// const API_URL = 'https://api.kozackiefury.pl/';
-const API_URL = 'http://localhost:5000/';
 
 const Car = () => {
     const params = useParams();
@@ -17,7 +14,7 @@ const Car = () => {
     const [fullImage, setFullImage] = useState(null)
     const navigate = useNavigate();
     useEffect(() => {
-        axios.get(`${API_URL}cars/car/${params.caId}`)
+        axiosConfig.get(`cars/car/${params.caId}`)
         .then(res => {
                 let thisCar = res.data
                 setCar(thisCar);

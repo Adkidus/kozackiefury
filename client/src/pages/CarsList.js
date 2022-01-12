@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
+import axiosConfig from '../utils/axiosConfig';
 import { Container, Row, Col } from 'react-bootstrap';
 import CarsSliderItem from '../components/cars/CarsSliderItem';
-
-// const API_URL = 'http://localhost:5000/';
-const API_URL = 'https://api.kozackiefury.pl/';
 
 const CarsList = () => {
     const [cars, setCars] = useState([])
     useEffect(() => {
-        axios.get(`${API_URL}cars/list`)
+        axiosConfig.get(`cars/list`)
         .then(res => {
             setCars(res.data);
         })
