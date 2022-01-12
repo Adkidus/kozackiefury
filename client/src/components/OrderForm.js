@@ -3,12 +3,12 @@ import { Col, Container, Form, Row, Button, FloatingLabel } from 'react-bootstra
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const OrderForm = ({car, hide}) => {
+const OrderForm = ({car, closeForm}) => {
 
     return <div className="order-form" style={{overflowY:"auto"}}>
         <Container>
             <div>
-                <FontAwesomeIcon icon={faTimes} style={{position: 'absolute',top:'1rem',right: '1rem',fontSize:'1.75rem',cursor:'pointer'}} onClick={hide}/>
+                <FontAwesomeIcon icon={faTimes} style={{position: 'absolute',top:'1rem',right: '1rem',fontSize:'1.75rem',cursor:'pointer'}} onClick={closeForm}/>
             </div>
             <Form>
                 <Row>

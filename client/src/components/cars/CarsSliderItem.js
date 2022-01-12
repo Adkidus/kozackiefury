@@ -7,13 +7,16 @@ const CarsSliderItem = ({car}) => {
     let [displayForm, setDisplaForm] = useState(false)
     let photos = car.photos;
     let photo = photos.length > 0 ? photos[0].location : '';
+    const closeForm = () => {
+        setDisplaForm(false);
+    }
     return(<Col lg={4} md={6} className="mb-3"> 
         <Card className="car-card">
             {/* <div className='car-card__price'>
                 <div>Cena</div>
                 <div></div>
             </div> */}
-            <Card.Img variant="top" src={photo} />
+            <Card.Img variant="top" src={photo} style={{width: '100%'}} />
             <Card.Body>
                 <Card.Title>
                     <div className='car-card__header'>
@@ -47,7 +50,7 @@ const CarsSliderItem = ({car}) => {
                 </div>
             </Card.Body>
         </Card>
-        {displayForm?<OrderForm car={car} />:''}
+        {displayForm?<OrderForm car={car} closeForm={closeForm} />:''}
     </Col>)
 }
 
