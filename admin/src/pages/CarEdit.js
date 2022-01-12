@@ -140,6 +140,17 @@ const CarEdit = () => {
                                     <label htmlFor="floatingInputCustom">0-100km/h (sekundy)</label>
                                 </Form.Floating>
                             </Col>
+                            <Col md={6} className="mb-3">
+                                <Form.Floating >
+                                    <Form.Select onChange={e=>setCar({...car,...{category: e.target.value}})}>
+                                        <option></option>
+                                        <option value="Fast&Furious" selected={car.category==='Fast&Furious'}>Fast&Furious</option>
+                                        <option value="Luxury&Business" selected={car.category==='Luxury&Business'}>Luxury&Business</option>
+                                        <option value="Retro&Soul" selected={car.category==='Retro&Soul'}>Retro&Soul</option>
+                                    </Form.Select>
+                                    <label htmlFor="floatingInputCustom">Kategoria</label>
+                                </Form.Floating>
+                            </Col>
                             <Col md={12} style={{paddingBottom:'.75rem',paddingTop:'1.75rem'}}>
                                 <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
                                     {/* <Button variant='danger'>Anuluj</Button> */}
