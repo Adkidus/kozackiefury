@@ -48,7 +48,7 @@ const ServiceItem = ({service, servInd, removeServ, updateServ}) => {
         }else
             removeServ(servInd)
     }
-    return <Col md={12} className="mb-3">
+    return <Col md={12} className="mb-5">
         <div style={{padding: '1rem', border:'1px solid rgba(0, 0, 0, 0.125)', boxShadow: "rgb(66 68 90) 0px 0px 24px -17px"}}>
             <Form onSubmit={save}>
                 <Row>
