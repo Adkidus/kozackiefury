@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axiosConfig from '../utils/axiosConfig';
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import Service from '../components/service'
 import ImagePreview from '../components/imagePreview';
 import ModalApp from '../components/modal';
 
-// const API_URL = 'http://localhost:5000/';
-const API_URL = 'https://api.kozackiefury.pl/';
 
 const CarEdit = () => {
     const params = useParams();
@@ -19,7 +17,7 @@ const CarEdit = () => {
     const image3 = useRef();
     const image4 = useRef();
     useEffect(() => {
-        axios.get(`${API_URL}cars/car/${params.carId}`)
+        axiosConfig.get(`cars/carById/${params.carId}`)
         .then(res => {
             let thisCar = res.data
             setCar(thisCar);
@@ -40,7 +38,7 @@ const CarEdit = () => {
         // thisCar.photos[1].location = "https://kozackiefury.s3.eu-central-1.amazonaws.com/1640941901374.webp"
         // thisCar.photos[1].key = "1640941901374.webp"
         // console.log(thisCar)
-        axios.post(`${API_URL}cars/update`,car)
+        axiosConfig.post(`cars/update`,car)
         .then(res => {
             alert('zapisano')
         })
@@ -55,7 +53,7 @@ const CarEdit = () => {
             car: thisCar,
             photokey: photo.key
         }
-        axios.post(`${API_URL}cars/deleteImage`,toDelete)
+        axiosConfig.post(`cars/deleteImage`,toDelete)
         .then(res => {
             if(res.status === 200)
                 setCar(thisCar)
@@ -75,7 +73,7 @@ const CarEdit = () => {
     const updateImage= (id, img) => {
         let formData = new FormData();
         formData.append("fileUpload", img);
-        axios.post(`${API_URL}cars/uploadImage/${id}`,formData)
+        axiosConfig.post(`cars/uploadImage/${id}`,formData)
     }
     return(<>
         {car ? <>

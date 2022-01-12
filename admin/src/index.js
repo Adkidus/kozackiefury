@@ -16,6 +16,7 @@ import Header from './components/header'
 import CarsList from './pages/CarsList';
 import NewCar from './pages/NewCar';
 import CarEdit from './pages/CarEdit';
+import ServicesPage from './pages/ServicesPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route path="/flota" element={<CarsList />} />
             <Route path="/dodaj-auto" element={<NewCar />} />
             <Route path="/auto/:carId" element={<CarEdit />} />
+            <Route path="/oferty" element={<ServicesPage />} />
           </Routes>
         </Container>
       </Router>

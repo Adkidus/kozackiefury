@@ -45,7 +45,7 @@ const Header = () => {
             </Col>
             <Col md={4}>
                 <div style={column}>
-                    <Link to="/dodaj-auto" style={{textDecoration: 'none'}}>
+                    <Link to="/oferty" style={{textDecoration: 'none'}}>
                         <div style={linkText}>
                             OFERTY
                         </div>

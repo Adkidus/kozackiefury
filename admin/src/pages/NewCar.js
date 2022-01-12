@@ -1,12 +1,10 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { Col, Form, Row, FloatingLabel, Button } from 'react-bootstrap';
 import ImagePreview from '../components/imagePreview';
 import Service from '../components/service'
-import axios from 'axios';
+import axiosConfig from '../utils/axiosConfig';
 import ModalApp from '../components/modal';
 import { useNavigate } from 'react-router-dom';
-// const API_URL = 'http://localhost:5000/';
-const API_URL = 'https://api.kozackiefury.pl/';
 
 const NewCar = () => {
     const navigate = useNavigate()
@@ -29,6 +27,12 @@ const NewCar = () => {
     const image2 = useRef();
     const image3 = useRef();
     const image4 = useRef();
+    useEffect(() => {
+        axiosConfig.get('services/list')
+        .then(res => {
+            setServices(res.data);
+        })
+    },[])
     const addService = () => {
         let arr = [...services]
         arr.push({
@@ -52,7 +56,7 @@ const NewCar = () => {
     const saveCar = () => {
         const dataToSave = {...carInfo}
         dataToSave.services = [...services];
-        axios.post(`${API_URL}cars/newCar`,dataToSave)
+        axiosConfig.post(`cars/newCar`,dataToSave)
         .then(res => {
             uploadImages(res.data._id)
         })
@@ -71,7 +75,7 @@ const NewCar = () => {
     const updateImage= (id, img) => {
         let formData = new FormData();
         formData.append("fileUpload", img);
-        axios.post(`${API_URL}cars/uploadImage/${id}`,formData)
+        axiosConfig.post(`cars/uploadImage/${id}`,formData)
     }
     return(
         <>

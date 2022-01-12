@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Col, Card, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import axios from 'axios';
-// const API_URL = 'http://localhost:5000/';
-const API_URL = 'https://api.kozackiefury.pl/';
+import axiosConfig from '../utils/axiosConfig';
 
 const CarsList = () => {
     const [carsList, setCarsList] = useState([])
     useEffect(() => {
-        axios.get(`${API_URL}cars/list`)
+        axiosConfig.get(`cars/list`)
         .then(res => {
             setCarsList(res.data);
         })

@@ -47,7 +47,7 @@ const Service = ({title, time, price, description, setService, deleteService, in
                     <Form.Control
                         as="textarea"
                         placeholder="Opis"
-                        style={{ minHeight: '150px' }}
+                        style={{ minHeight: '250px' }}
                         value={description}
                         onChange={e=>update('description',e.target.value)}
                     />

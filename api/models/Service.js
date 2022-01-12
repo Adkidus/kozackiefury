@@ -7,6 +7,8 @@ const ServiceSchema = new Schema({
         required: true
     },
     description: String
-})
+}, {
+    timestamps: true
+});
 
 module.exports = Service = mongoose.model('Service', ServiceSchema);
