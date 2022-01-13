@@ -63,10 +63,58 @@ const OrderForm = ({car, closeForm}) => {
                     <Col md={6}>
                         <FloatingLabel controlId="floatingSelectGrid" label="Wynajem na podmiot">
                             <Form.Select className="mb-3" aria-label="Wynajem na podmiot" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}}>
-                                <option>Wybierz</option>
+                                <option disabled>Wybierz</option>
                                 <option value="Prywatnie">Prywatnie</option>
                                 <option value="Firma">Firma</option>
                             </Form.Select>
+                        </FloatingLabel>
+                    </Col>
+                    <Col md={12} className='mb-3 mt-4'>
+                        <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>DANE FIRMY</div>
+                    </Col>
+                    <Col md={6}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Nazwa firmy"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="Nazwa firmy" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}} />
+                        </FloatingLabel>
+                    </Col>
+                    <Col md={6}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="NIP"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="NIP" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}} />
+                        </FloatingLabel>
+                    </Col>
+                    <Col md={6}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Adres"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="Adres" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}} />
+                        </FloatingLabel>
+                    </Col>
+                    <Col md={6}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Miejscowość"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="Miejscowość" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}} />
+                        </FloatingLabel>
+                    </Col>
+                    <Col md={6}>
+                        <FloatingLabel
+                            controlId="floatingInput"
+                            label="Kod pocztowy"
+                            className="mb-3"
+                        >
+                            <Form.Control type="text" placeholder="Kod pocztowy" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}} />
                         </FloatingLabel>
                     </Col>
                     <Col md={12} className='mb-3 mt-4'>
@@ -75,7 +123,8 @@ const OrderForm = ({car, closeForm}) => {
                     <Col md={12}>
                         <FloatingLabel controlId="floatingSelectGrid" label="Rodzaj usługi">
                             <Form.Select className="mb-3" aria-label="Rodzaj usługi" style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff'}}>
-                                <option>Wybierz</option>
+                                <option disabled>Wybierz</option>
+                                {car.services.map(service =>  <option key={service._id} value={service._id}>{service.title}</option>)}
                             </Form.Select>
                         </FloatingLabel>
                     </Col>
