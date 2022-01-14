@@ -7,7 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const validationSchema = Yup.object({
     first_name: Yup.string().required(),
-    email: Yup.string().emial().required(),
+    email: Yup.string().email().required(),
 })
 
 const initialValues = {
