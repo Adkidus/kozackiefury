@@ -27,6 +27,10 @@ const NewCar = () => {
     const image2 = useRef();
     const image3 = useRef();
     const image4 = useRef();
+    const image5 = useRef();
+    const image6 = useRef();
+    const image7 = useRef();
+    const image8 = useRef();
     useEffect(() => {
         axiosConfig.get('services/list')
         .then(res => {
@@ -70,6 +74,14 @@ const NewCar = () => {
             updateImage(id, image3.current.image)
         if(image4.current.image)
             updateImage(id, image4.current.image)
+        if(image5.current.image)
+            updateImage(id, image5.current.image)
+        if(image6.current.image)
+            updateImage(id, image6.current.image)
+        if(image7.current.image)
+            updateImage(id, image7.current.image)
+        if(image8.current.image)
+            updateImage(id, image8.current.image)
         setModalShow(true)
     }
     const updateImage= (id, img) => {
@@ -226,6 +238,18 @@ const NewCar = () => {
                 </Col>
                 <Col md={3} className="mb-3">
                     <ImagePreview id="image4" ref={image4} />
+                </Col>
+                <Col md={3} className="mb-3">
+                    <ImagePreview id="image1" ref={image5} />
+                </Col>
+                <Col md={3} className="mb-3">
+                    <ImagePreview id="image2" ref={image6} />
+                </Col>
+                <Col md={3} className="mb-3">
+                    <ImagePreview id="image3" ref={image7} />
+                </Col>
+                <Col md={3} className="mb-3">
+                    <ImagePreview id="image4" ref={image8} />
                 </Col>
                 <Col md={12} style={{paddingBottom: "1rem", paddingTop: "2rem"}}>
                     Oferta

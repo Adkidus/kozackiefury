@@ -16,6 +16,10 @@ const CarEdit = () => {
     const image2 = useRef();
     const image3 = useRef();
     const image4 = useRef();
+    const image5 = useRef();
+    const image6 = useRef();
+    const image7 = useRef();
+    const image8 = useRef();
     useEffect(() => {
         axiosConfig.get(`cars/carById/${params.carId}`)
         .then(res => {
@@ -69,6 +73,14 @@ const CarEdit = () => {
             updateImage(id, image3.current.image)
         if(image4.current.image)
             updateImage(id, image4.current.image)
+        if(image5.current.image)
+            updateImage(id, image5.current.image)
+        if(image6.current.image)
+            updateImage(id, image6.current.image)
+        if(image7.current.image)
+            updateImage(id, image7.current.image)
+        if(image8.current.image)
+            updateImage(id, image8.current.image)
     }
     const updateImage= (id, img) => {
         let formData = new FormData();
@@ -225,17 +237,22 @@ const CarEdit = () => {
                             Zdjęcia
                             </Col>
                             <hr />
-                            {[...Array(4)].map((e,i)=>{
+                            {[...Array(8)].map((e,i)=>{
                                 let photo = car.photos[i];
                                 if(!photo){
-                                    return <Col key={i} md={3} className="mb-3">
+                                    return <Col key={i} md={3} className="mb-5">
+                                        <div>BRAK ZDJECIA</div>
                                         <ImagePreview 
                                             id={'image4' + i} 
                                             ref={
                                                 i===0?image1:
                                                 i===1?image2:
                                                 i===2?image3:
-                                                i===3?image4:''} />
+                                                i===3?image4:
+                                                i===4?image5:
+                                                i===5?image6:
+                                                i===6?image7:
+                                                i===7?image8:''} />
                                     </Col>
                                 }else{
                                     return <Col key={i} md={3} className="mb-3">
