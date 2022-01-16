@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const NavbarEl = () => {
     return(
-        <Navbar collapseOnSelect expand="lg" bg="black" variant="black">
+        <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
             <Container>
                 <Navbar.Brand>
                     <Link to='/'>Kozackie Fury</Link>

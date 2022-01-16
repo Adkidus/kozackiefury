@@ -16,7 +16,7 @@ const CarsSliderItem = ({car}) => {
                 <div>Cena</div>
                 <div></div>
             </div> */}
-            <Card.Img variant="top" src={photo} style={{width: '100%'}} />
+            <Card.Img variant="top" src={photo} style={{width: '100%',height:'55vh',objectFit:'cover',maxHeight:'310px'}} />
             <Card.Body>
                 <Card.Title>
                     <div className='car-card__header'>
