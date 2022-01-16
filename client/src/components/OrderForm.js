@@ -38,7 +38,7 @@ const OrderForm = ({car, service, closeForm}) => {
     return <div className="order-form" style={{overflowY:"auto"}}>
         <Container>
             <div>
-                <FontAwesomeIcon icon={faTimes} style={{position: 'absolute',top:'1rem',right: '1rem',fontSize:'1.75rem',cursor:'pointer'}} onClick={closeForm}/>
+                <FontAwesomeIcon icon={faTimes} style={{position: 'fixed',top:'1.25rem',right: '1.25rem',fontSize:'1.75rem',cursor:'pointer'}} onClick={closeForm}/>
             </div>
             <Formik
                 initialValues={initialValues}
@@ -145,49 +145,74 @@ const OrderForm = ({car, service, closeForm}) => {
                                     <Col md={12} className='mb-3 mt-4'>
                                         <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>DANE FIRMY</div>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} className="mb-3">
                                         <FloatingLabel
-                                            controlId="floatingInput"
+                                            controlId="company_name"
                                             label="Nazwa firmy"
-                                            className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Nazwa firmy" className="input-gold" />
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder="Nazwa firmy" 
+                                                className="input-gold"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.company_name}  />
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} className="mb-3">
                                         <FloatingLabel
-                                            controlId="floatingInput"
+                                            controlId="company_nip"
                                             label="NIP"
-                                            className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="NIP" className="input-gold" />
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder="NIP" 
+                                                className="input-gold" 
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.company_nip}  />
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} className="mb-3">
                                         <FloatingLabel
-                                            controlId="floatingInput"
+                                            controlId="company_address"
                                             label="Adres"
-                                            className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Adres" className="input-gold" />
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder="Adres" 
+                                                className="input-gold" 
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.company_address}  />
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} className="mb-3">
                                         <FloatingLabel
-                                            controlId="floatingInput"
+                                            controlId="company_city"
                                             label="Miejscowość"
-                                            className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Miejscowość" className="input-gold" />
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder="Miejscowość" 
+                                                className="input-gold" 
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.company_city}  />
                                         </FloatingLabel>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} className="mb-3">
                                         <FloatingLabel
-                                            controlId="floatingInput"
+                                            controlId="company_postal_code"
                                             label="Kod pocztowy"
-                                            className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Kod pocztowy" className="input-gold" />
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder="Kod pocztowy" 
+                                                className="input-gold" 
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                                value={formik.values.company_postal_code}  />
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
@@ -234,11 +259,12 @@ const OrderForm = ({car, service, closeForm}) => {
                                 <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>UWAGI</div>
                             </Col>
                             <Col md={12}>
-                                <FloatingLabel controlId="floatingTextarea2" label="Uwagi">
+                                <FloatingLabel controlId="notes" label="Uwagi">
                                     <Form.Control
                                         as="textarea"
                                         style={{background:'#000',border:'1px solid #e5bc42',borderRadius:0,color:'#fff',height:'100px'}}
-                                    />
+                                        onChange={formik.handleChange}
+                                        value={formik.values.notes}  />
                                 </FloatingLabel>
                             </Col>
                             <Col md={12}>
