@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { Card, Col, Button} from 'react-bootstrap';
+import OrderForm from "../OrderForm";
 
-const Service = ({service}) => {
-
+const Service = ({service ,car}) => {
+    const [displayForm, setDisplaForm] = useState(false)
+    const closeForm = () => {
+        setDisplaForm(false);
+    }
     return(<Col md={4} className="mb-3">
         <Card className="car-card">
             <Card.Body>
@@ -17,9 +21,10 @@ const Service = ({service}) => {
                         {service.price}
                     </div>
                 </div>
-                <Button className='btn-gold w-100 mt-4'>WYBIERAM</Button>
+                <Button className='btn-gold w-100 mt-4' onClick={()=>setDisplaForm(true)}>WYBIERAM</Button>
             </Card.Body>
         </Card>
+        {displayForm?<OrderForm car={car} service={service} closeForm={closeForm} />:''}
     </Col>)
 }
 

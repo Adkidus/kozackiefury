@@ -71,7 +71,7 @@ const Car = () => {
                     <h5 style={{color:'#e5bc42'}}>OFERTA</h5>
                     <div className='my-4'>
                         <Row>
-                            {car.services.map(service  => <Service key={service._id} service={service} />)}
+                            {car.services.map(service  => <Service key={service._id} service={service} car={car} />)}
                         </Row>
                     </div>
                 </section>

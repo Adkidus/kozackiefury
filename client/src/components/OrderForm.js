@@ -7,7 +7,10 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const validationSchema = Yup.object({
     first_name: Yup.string().required(),
+    last_name: Yup.string().required(),
     email: Yup.string().email().required(),
+    location: Yup.string().required(),
+    date: Yup.string().required(),
 })
 
 const initialValues = {
@@ -15,13 +18,13 @@ const initialValues = {
     last_name: '',
     email: '', 
     phone: '',
-    rent_for_subject: '',
+    rent_for_subject: 'Prywatnie',
     company: '',
     company_nip: '',
     company_address: '',
     company_city: '',
     company_postal_code: '',
-    service: '',
+    serviceId: '',
     location: '',
     date: '',
     notes: ''
@@ -31,7 +34,7 @@ const onSubmit = values => {
     console.log('FORM VALUES ', values)
 }
 
-const OrderForm = ({car, closeForm}) => {
+const OrderForm = ({car, service, closeForm}) => {
     return <div className="order-form" style={{overflowY:"auto"}}>
         <Container>
             <div>
@@ -59,11 +62,10 @@ const OrderForm = ({car, closeForm}) => {
                             <Col md={12} className="mb-3">
                                 <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>DANE KONTAKTOWE</div>
                             </Col>
-                            <Col md={6}>
+                            <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="first_name"
                                     label="Imię *"
-                                    className="mb-3"
                                 >
                                     <Form.Control 
                                         type="text" 
@@ -76,15 +78,14 @@ const OrderForm = ({car, closeForm}) => {
                                         // isInvalid={!!formik.errors.first_name}
                                     />
                                 </FloatingLabel>
-                                <Form.Control.Feedback type="invalid">
-                                    {formik.errors.first_name}
+                                <Form.Control.Feedback type="invalid" style={{display: formik.errors.first_name ? 'block':'none'}}>
+                                    To pole jest wymagane!
                                 </Form.Control.Feedback>
                             </Col>
-                            <Col md={6}>
+                            <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="last_name"
                                     label="Nazwisko"
-                                    className="mb-3"
                                 >
                                     <Form.Control 
                                         type="text" 
@@ -94,12 +95,14 @@ const OrderForm = ({car, closeForm}) => {
                                         onBlur={formik.handleBlur}
                                         value={formik.values.last_name}  />
                                 </FloatingLabel>
+                                <Form.Control.Feedback type="invalid" style={{display: formik.errors.last_name ? 'block':'none'}}>
+                                    To pole jest wymagane!
+                                </Form.Control.Feedback>
                             </Col>
-                            <Col md={6}>
+                            <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="email"
                                     label="Email"
-                                    className="mb-3"
                                 >
                                     <Form.Control
                                     type="email"
@@ -109,6 +112,9 @@ const OrderForm = ({car, closeForm}) => {
                                     onBlur={formik.handleBlur}
                                     value={formik.values.email}  />
                                 </FloatingLabel>
+                                <Form.Control.Feedback type="invalid" style={{display: formik.errors.email ? 'block':'none'}}>
+                                    To pole jest wymagane!
+                                </Form.Control.Feedback>
                             </Col>
                             <Col md={6}>
                                 <FloatingLabel
@@ -126,7 +132,7 @@ const OrderForm = ({car, closeForm}) => {
                                 </FloatingLabel>
                             </Col>
                             <Col md={6}>
-                                <FloatingLabel controlId="floatingSelectGrid" label="Wynajem na podmiot">
+                                <FloatingLabel controlId="rent_for_subject" onChange={formik.handleChange} label="Wynajem na podmiot">
                                     <Form.Select aria-label="Wynajem na podmiot" className="input-gold mb-3">
                                         <option disabled>Wybierz</option>
                                         <option value="Prywatnie">Prywatnie</option>
@@ -134,81 +140,94 @@ const OrderForm = ({car, closeForm}) => {
                                     </Form.Select>
                                 </FloatingLabel>
                             </Col>
-                            <Col md={12} className='mb-3 mt-4'>
-                                <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>DANE FIRMY</div>
-                            </Col>
-                            <Col md={6}>
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Nazwa firmy"
-                                    className="mb-3"
-                                >
-                                    <Form.Control type="text" placeholder="Nazwa firmy" className="input-gold" />
-                                </FloatingLabel>
-                            </Col>
-                            <Col md={6}>
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="NIP"
-                                    className="mb-3"
-                                >
-                                    <Form.Control type="text" placeholder="NIP" className="input-gold" />
-                                </FloatingLabel>
-                            </Col>
-                            <Col md={6}>
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Adres"
-                                    className="mb-3"
-                                >
-                                    <Form.Control type="text" placeholder="Adres" className="input-gold" />
-                                </FloatingLabel>
-                            </Col>
-                            <Col md={6}>
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Miejscowość"
-                                    className="mb-3"
-                                >
-                                    <Form.Control type="text" placeholder="Miejscowość" className="input-gold" />
-                                </FloatingLabel>
-                            </Col>
-                            <Col md={6}>
-                                <FloatingLabel
-                                    controlId="floatingInput"
-                                    label="Kod pocztowy"
-                                    className="mb-3"
-                                >
-                                    <Form.Control type="text" placeholder="Kod pocztowy" className="input-gold" />
-                                </FloatingLabel>
+                            <Col md={12}>
+                                <Row style={{display: formik.values.rent_for_subject === 'Firma' ? 'flex':'none'}}>
+                                    <Col md={12} className='mb-3 mt-4'>
+                                        <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>DANE FIRMY</div>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Nazwa firmy"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Nazwa firmy" className="input-gold" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="NIP"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="NIP" className="input-gold" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Adres"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Adres" className="input-gold" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Miejscowość"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Miejscowość" className="input-gold" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Kod pocztowy"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Kod pocztowy" className="input-gold" />
+                                        </FloatingLabel>
+                                    </Col>
+                                </Row>
                             </Col>
                             <Col md={12} className='mb-3 mt-4'>
                                 <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>USŁUGA</div>
                             </Col>
                             <Col md={12}>
-                                <FloatingLabel controlId="floatingSelectGrid" label="Rodzaj usługi">
+                                <FloatingLabel controlId="serviceId" onChange={formik.handleChange} label="Rodzaj usługi">
                                     <Form.Select aria-label="Rodzaj usługi" className="input-gold mb-3">
                                         <option disabled>Wybierz</option>
                                         {car.services.map(service =>  <option key={service._id} value={service._id}>{service.title}</option>)}
                                     </Form.Select>
                                 </FloatingLabel>
                             </Col>
-                            <Col md={6}>
+                            <Col md={6} className="mb-3">
                                 <FloatingLabel
-                                    controlId="floatingInput"
+                                    controlId="location"
                                     label="Miejscowość"
-                                    className="mb-3"
+                                    onChange={formik.handleChange} 
                                 >
-                                    <Form.Control type="text" placeholder="Miejscowość" className="input-gold" />
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Data" 
+                                        className="input-gold"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.location}  />
                                 </FloatingLabel>
                             </Col>
-                            <Col md={6}>
+                            <Col md={6} className="mb-3">
                                 <FloatingLabel
-                                    controlId="floatingInput"
+                                    controlId="date"
                                     label="Data"
-                                    className="mb-3"
                                 >
-                                    <Form.Control type="text" placeholder="Data" className="input-gold" />
+                                    <Form.Control 
+                                        type="text" 
+                                        placeholder="Data" 
+                                        className="input-gold"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.date}  />
                                 </FloatingLabel>
                             </Col>
                             <Col md={12} className='mb-3 mt-4'>
