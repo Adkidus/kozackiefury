@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import axiosConfig from '../utils/axiosConfig';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { Form, Row, Col, Button, FloatingLabel } from 'react-bootstrap';
 import Service from '../components/service'
 import ImagePreview from '../components/imagePreview';
 import ModalApp from '../components/modal';
@@ -87,6 +87,16 @@ const CarEdit = () => {
         formData.append("fileUpload", img);
         axiosConfig.post(`cars/uploadImage/${id}`,formData)
     }
+    const addService =() =>{
+        let arr = [...car.services]
+        arr.push({
+            title: '', 
+            time: '',
+            price: '',
+            description: ''
+        })
+        setCar({...car,...{services: arr}})
+    }
     return(<>
         {car ? <>
             <Form>
@@ -162,6 +172,17 @@ const CarEdit = () => {
                                     </Form.Select>
                                     <label htmlFor="floatingInputCustom">Kategoria</label>
                                 </Form.Floating>
+                            </Col>
+                            <Col md={12} className="mb-3">
+                                <FloatingLabel label="Opis">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Opis"
+                                        style={{ minHeight: '200px' }}
+                                        value={car.description}
+                                        onChange={e=>setCar({...car,...{description: e.target.value}})}
+                                    />
+                                </FloatingLabel>
                             </Col>
                             <Col md={12} style={{paddingBottom:'.75rem',paddingTop:'1.75rem'}}>
                                 <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
@@ -282,6 +303,7 @@ const CarEdit = () => {
                             {car.services.map((el,index) => <Row key={index} style={{paddingBottom: "5rem"}}>
                                 <Service title={el.title} time={el.time} price={el.price} description={el.description} index={index} setService={setService} deleteService={deleteService} />
                             </Row> )}
+                            <Button onClick={addService}>Dodaj kolejną</Button>
                             <Col md={12} style={{paddingBottom:'.75rem'}}>
                                 <div style={{display: 'flex',width:"100%",justifyContent:"right"}}>
                                     {/* <Link to="/">
