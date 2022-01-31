@@ -35,6 +35,8 @@ const onSubmit = values => {
 }
 
 const OrderForm = ({car, service, closeForm}) => {
+    console.log(service)
+    console.log(car.services)
     return <div className="order-form" style={{overflowY:"auto"}}>
         <Container>
             <div>
@@ -85,7 +87,7 @@ const OrderForm = ({car, service, closeForm}) => {
                             <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="last_name"
-                                    label="Nazwisko"
+                                    label="Nazwisko *"
                                 >
                                     <Form.Control 
                                         type="text" 
@@ -102,7 +104,7 @@ const OrderForm = ({car, service, closeForm}) => {
                             <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="email"
-                                    label="Email"
+                                    label="Email *"
                                 >
                                     <Form.Control
                                     type="email"
@@ -231,7 +233,7 @@ const OrderForm = ({car, service, closeForm}) => {
                             <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="location"
-                                    label="Miejscowość"
+                                    label="Miejscowość *"
                                     onChange={formik.handleChange} 
                                 >
                                     <Form.Control 
@@ -241,11 +243,14 @@ const OrderForm = ({car, service, closeForm}) => {
                                         onChange={formik.handleChange}
                                         value={formik.values.location}  />
                                 </FloatingLabel>
+                                <Form.Control.Feedback type="invalid" style={{display: formik.errors.location ? 'block':'none'}}>
+                                    To pole jest wymagane!
+                                </Form.Control.Feedback>
                             </Col>
                             <Col md={6} className="mb-3">
                                 <FloatingLabel
                                     controlId="date"
-                                    label="Data"
+                                    label="Data *"
                                 >
                                     <Form.Control 
                                         type="text" 
@@ -254,6 +259,9 @@ const OrderForm = ({car, service, closeForm}) => {
                                         onChange={formik.handleChange}
                                         value={formik.values.date}  />
                                 </FloatingLabel>
+                                <Form.Control.Feedback type="invalid" style={{display: formik.errors.date ? 'block':'none'}}>
+                                    To pole jest wymagane!
+                                </Form.Control.Feedback>
                             </Col>
                             <Col md={12} className='mb-3 mt-4'>
                                 <div style={{fontSize:'1.25rem',fontWeight:'bold'}}>UWAGI</div>

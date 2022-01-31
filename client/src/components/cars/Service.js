@@ -7,18 +7,20 @@ const Service = ({service ,car}) => {
     const closeForm = () => {
         setDisplaForm(false);
     }
-    return(<Col md={4} className="mb-3">
+    return(<Col lg={4} md={6} className="mb-3">
         <Card className="car-card">
             <Card.Body>
                 <div style={{display:'flex',flexFlow:'column',gap:'1rem',justifyContent:'center',alignItems:'center'}}>
-                    <div style={{textAlign:'center'}}>
+                    <div style={{textAlign:'center', fontWeight: 'bold', height:'75px',display:'flex',justifyContent:'center',alignItems: 'center',fontSize:'1.1rem'}}>
                         {service.title}
                     </div>
                     <div style={{textAlign:'center'}}>
-                        {service.time}
+                        <div style={{color:'#e5bc42',fontWeight:'bold'}}>CZAS</div>
+                        <div>{service.time || 'INDYWIDUALNIE DO USTALENIA'}</div>
                     </div>
                     <div style={{textAlign:'center'}}>
-                        {service.price}
+                        <div style={{color:'#e5bc42',fontWeight:'bold'}}>CENA</div>
+                        <div>{service.price || 'INDYWIDUALNIE DO USTALENIA'}</div>
                     </div>
                 </div>
                 <Button className='btn-gold w-100 mt-4' onClick={()=>setDisplaForm(true)}>WYBIERAM</Button>
