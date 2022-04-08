@@ -28,7 +28,7 @@ const upload = multer({
     })
 })
 
-router.post('/newCar', async (req, res) => {
+router.post('/new', auth, async (req, res) => {
     try {
         let newCar = req.body;
         let carPathName = `${newCar.brand} ${newCar.model}`;
@@ -41,7 +41,7 @@ router.post('/newCar', async (req, res) => {
     }
 })
 
-router.post('/uploadImage/:carId', upload.array('fileUpload',1), async(req, res) => {
+router.post('/uploadImage/:carId', auth, upload.array('fileUpload',1), async(req, res) => {
     const car = await Car.findOne({_id: req.params.carId})
     car.photos.push({key: req.files[0].key, location: req.files[0].location})
     try {
@@ -52,7 +52,7 @@ router.post('/uploadImage/:carId', upload.array('fileUpload',1), async(req, res)
     }
 });
 
-router.post('/update', async(req, res) => {
+router.post('/update', auth, async(req, res) => {
     try {
         await Car.updateOne({_id: req.body._id},req.body);
         carUpdated = await Car.findOne({_id: req.body._id});
@@ -62,9 +62,11 @@ router.post('/update', async(req, res) => {
     }
 })
 
-router.get('/list', async (req, res) => {
+router.get('/list', auth, async (req, res) => {
     try {
-        let cars = await Car.find({})
+        let cars = [];
+        if(req.user.role === 'admin')
+            cars = await Car.find({})
         res.status(200).json(cars); 
     } catch (error) {
         res.status(500).json({msg:'Error: ' + e.message});
@@ -80,7 +82,7 @@ router.get('/carById/:carId', async (req, res) => {
     }
 })
 
-router.get('/car/:pathName', async (req, res) => {
+router.get('/car/:pathName', auth, async (req, res) => {
     try {
         const thisCar = await Car.findOne({pathName: req.params.pathName})
         if(!thisCar)
@@ -91,7 +93,7 @@ router.get('/car/:pathName', async (req, res) => {
     }
 })
 
-router.post('/deleteImage', async (req, res) => {
+router.post('/deleteImage', auth, async (req, res) => {
     try {
         aws.s3.deleteObject({
             Bucket: aws.bucket,

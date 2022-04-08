@@ -2,7 +2,6 @@ require('dotenv').config()
 
 const express = require('express');
 const connectDB = require('./config/db');
-// const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -11,8 +10,6 @@ connectDB();
 
 // Init Middleware
 app.use(express.json({ extended: false }));
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,8 +21,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use('/auth', require('./routes/Auth'));
-// app.use('/users', require('./routes/Users'));
+app.use('/auth', require('./routes/Auth'));
+app.use('/users', require('./routes/Users'));
 app.use('/cars', require('./routes/Cars'));
 app.use('/services', require('./routes/Services'));
 app.use('/orders', require('./routes/Orders'));
