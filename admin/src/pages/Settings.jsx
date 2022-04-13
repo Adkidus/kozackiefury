@@ -12,5 +12,13 @@ export default function Settings() {
                 </div>
             </div>
         </Card>
+
+        <div className="grid">
+            <div className='row__one'>
+            <Card>1</Card>
+            <Card>2</Card>
+            </div>
+        </div>
+
     </Section>
 };
