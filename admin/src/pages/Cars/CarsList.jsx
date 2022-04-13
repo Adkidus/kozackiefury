@@ -85,9 +85,9 @@ export default function CarsList() {
       }, []);
     return <Section>
         <Card>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <div className='header'>
                 <div className="title">
-                    <h2>FLOTA</h2>
+                    <h2>Flota</h2>
                 </div>
                 <Link to='/cars/new'>
                     <ButtonOutline>

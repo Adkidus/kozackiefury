@@ -9,6 +9,11 @@ export const Card = styled.section`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  .header{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: 'center';
+  }
   .title {
     h2 {
       color: ${color.gold};

@@ -42,10 +42,10 @@ export default function CarNew() {
         }
     }
     return <Section>
-                <Card>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        <Card>
+            <div className='header'>
                 <div className="title">
-                    <h2>DODAJ SAMOCHÓD</h2>
+                    <h2>Dodaj Samochód</h2>
                 </div>
                 <Link to='/cars'>
                     <ButtonOutline>
