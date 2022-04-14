@@ -53,3 +53,9 @@ export const Actions = styled.div`
     gap: 2rem;
     margin-top: 1.25rem;
 `;
+
+export const Action = styled.div`
+  display: flex; 
+  justify-content: end; 
+  margin-top: 1rem;
+`;

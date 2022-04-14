@@ -20,6 +20,12 @@ export const Card = styled.section`
       font-family: "Advent Pro", cursive;
       letter-spacing: 0.3rem;
     }
+    h2.white{
+      color: ${color.white};
+    }
+  }
+  :hover{
+    border: ${props => props.hover ? `1px solid ${color.gold}` : 'none'};
   }
 `;
 
@@ -29,8 +35,16 @@ export const CardItem = styled.div`
   display: flex;
   flex-flow: column;
   padding: .5rem;
-
+  @media screen and (max-width: 1350px) {
+    flex: ${props => props.sm ? 100 : 50}%;
+  }
   @media screen and (max-width: 780px) {
     flex:100%;
   }
+`;
+
+export const Wrap = styled.div`
+  display: flex;
+  flex-flow: row; 
+  flex-wrap: wrap;
 `;
