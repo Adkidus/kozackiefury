@@ -51,7 +51,7 @@ export const Actions = styled.div`
     justify-content: end;
     padding: 1rem;
     gap: 2rem;
-    margin-top: 1.25rem;
+    margin-top: 2rem;
 `;
 
 export const Action = styled.div`

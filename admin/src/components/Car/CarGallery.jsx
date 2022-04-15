@@ -1,25 +1,50 @@
-import React  from 'react'
+import React, {useState}  from 'react'
 import styled from 'styled-components'
 import {FaPlus} from 'react-icons/fa'
 import {BsImageAlt} from 'react-icons/bs'
 import * as color from '../../styles/Colors';
 import { ButtonFill, ButtonOutline, Actions } from '../../styles/Buttons'
 
+const ImageUpload = ({image, handleImg, index}) => {
+    const { src } = image;
+    return <Upload>
+        <div className="js--image-preview" style={{  backgroundImage: "url(" + src + ")"}}>
+            {src ? '' :  <BsImageAlt />}
+        </div>
+        <div className="upload-options">
+            <label>
+                <span><FaPlus /></span>
+                <input data-index={index} type="file" className="image-upload" accept="image/*" onChange={handleImg} />
+            </label>
+        </div>
+    </Upload>
+}
+
 export default function CarGallery ({stepActions}){
+    const [images, setImages] = useState([])
+    const addImage = () => {
+        let arr = [...images];
+        arr.push({alt:'', src:'', file:''})
+        setImages(arr)
+    }
+    const handleImg = e => {
+        const index = e.target.getAttribute('data-index');
+        let arr = [...images]
+        let img = {...arr[index]}
+        if(e.target.files[0]) {
+            img = {
+                src: URL.createObjectURL(e.target.files[0]),
+                alt: e.target.files[0].name,
+                file: e.target.files[0]
+            }
+        }
+        arr[index] = img;
+        setImages(arr)
+    }
     return <div>
         <Wrapper>
-            <Upload>
-                <div className="js--image-preview">
-                    <BsImageAlt />
-                </div>
-                <div className="upload-options">
-                    <label>
-                        <span><FaPlus /></span>
-                        <input type="file" className="image-upload" accept="image/*" />
-                    </label>
-                </div>
-            </Upload>
-            <AddImage>
+            {images.map((image,id) => <ImageUpload key={id} index={id} image={image} handleImg={handleImg} /> )}
+            <AddImage onClick={addImage}>
                 <FaPlus />
             </AddImage>
         </Wrapper>
@@ -29,7 +54,6 @@ export default function CarGallery ({stepActions}){
         </Actions>
     </div>
 }
-
 
 const Wrapper = styled.div`
     display: flex;
