@@ -1,4 +1,5 @@
-import React, {useState}  from 'react'
+import React, {useState, useEffect, useContext}  from 'react'
+import { CarContext } from '../../Providers/CarContext';
 import styled from 'styled-components'
 import {FaPlus} from 'react-icons/fa'
 import {BsImageAlt} from 'react-icons/bs'
@@ -21,7 +22,18 @@ const ImageUpload = ({image, handleImg, index}) => {
 }
 
 export default function CarGallery ({stepActions}){
+    const { carData, setCarData } = useContext(CarContext);
     const [images, setImages] = useState([])
+    useEffect(()=>{
+        if(carData?.images){
+            setImages(carData.images)
+        }else{
+            setCarData({
+                ...carData,
+                ...{images: []}
+            })
+        }
+    },[carData, setCarData])
     const addImage = () => {
         let arr = [...images];
         arr.push({alt:'', src:'', file:''})
@@ -41,6 +53,13 @@ export default function CarGallery ({stepActions}){
         arr[index] = img;
         setImages(arr)
     }
+    const save = () => {
+        setCarData({
+            ...carData,
+            ...{images: images}
+        })
+        stepActions()
+    }
     return <div>
         <Wrapper>
             {images.map((image,id) => <ImageUpload key={id} index={id} image={image} handleImg={handleImg} /> )}
@@ -50,7 +69,7 @@ export default function CarGallery ({stepActions}){
         </Wrapper>
         <Actions>
             <ButtonOutline type='button' onClick={()=>stepActions(false)}>Cofnij</ButtonOutline>
-            <ButtonFill type='button' onClick={stepActions}>Dalej</ButtonFill>
+            <ButtonFill type='button' onClick={save}>Dalej</ButtonFill>
         </Actions>
     </div>
 }
