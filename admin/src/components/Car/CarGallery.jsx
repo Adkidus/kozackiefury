@@ -5,20 +5,26 @@ import {FaPlus} from 'react-icons/fa'
 import {BsImageAlt} from 'react-icons/bs'
 import * as color from '../../styles/Colors';
 import { ButtonFill, ButtonOutline, Actions } from '../../styles/Buttons'
+import {FaTrash} from 'react-icons/fa'
 
-const ImageUpload = ({image, handleImg, index}) => {
+const ImageUpload = ({image, handleImg, deleteImage, index}) => {
     const { src } = image;
-    return <Upload>
-        <div className="js--image-preview" style={{  backgroundImage: "url(" + src + ")"}}>
-            {src ? '' :  <BsImageAlt />}
+    return <div style={{position: 'relative'}}>
+        <Trash data-index={index} onClick={deleteImage}>
+            <FaTrash />
+        </Trash>
+        <Upload>
+            <div className="js--image-preview" style={{  backgroundImage: "url(" + src + ")"}}>
+                {src ? '' :  <BsImageAlt />}
+            </div>
+            <div className="upload-options">
+                <label>
+                    <span><FaPlus /></span>
+                    <input data-index={index} type="file" className="image-upload" accept="image/*" onChange={handleImg} />
+                </label>
+            </div>
+        </Upload>
         </div>
-        <div className="upload-options">
-            <label>
-                <span><FaPlus /></span>
-                <input data-index={index} type="file" className="image-upload" accept="image/*" onChange={handleImg} />
-            </label>
-        </div>
-    </Upload>
 }
 
 export default function CarGallery ({stepActions}){
@@ -53,6 +59,12 @@ export default function CarGallery ({stepActions}){
         arr[index] = img;
         setImages(arr)
     }
+    const deleteImage = e => {
+        const index = e.target.getAttribute('data-index');
+        let arr = [...images]
+        arr.splice(index, 1);
+        setImages(arr)
+    }
     const save = () => {
         setCarData({
             ...carData,
@@ -62,7 +74,7 @@ export default function CarGallery ({stepActions}){
     }
     return <div>
         <Wrapper>
-            {images.map((image,id) => <ImageUpload key={id} index={id} image={image} handleImg={handleImg} /> )}
+            {images.map((image,id) => <ImageUpload key={id} index={id} image={image} handleImg={handleImg} deleteImage={deleteImage} /> )}
             <AddImage onClick={addImage}>
                 <FaPlus />
             </AddImage>
@@ -158,4 +170,19 @@ const Upload = styled.div`
             display: none;
         }
     }
+`;
+
+const Trash = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    color: ${color.white};
+    background: ${color.gold};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    z-index: 999;
+    right: 0;
 `;

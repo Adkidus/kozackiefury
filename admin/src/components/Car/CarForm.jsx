@@ -61,7 +61,7 @@ const CarForm = ({nextStep}) => {
             </CardItem>
             <CardItem>
                 <LabelInput>Kategoria</LabelInput>
-                <Select onChange={e=>setCarForm({...carForm, ...{category: e.target.value}})}>
+                <Select value={carForm.category} onChange={e=>setCarForm({...carForm, ...{category: e.target.value}})}>
                     <option value=''></option>
                     <option value='Fast&Furious'>Fast&Furious</option>
                     <option value='Luxury&Business'>Luxury&Business</option>

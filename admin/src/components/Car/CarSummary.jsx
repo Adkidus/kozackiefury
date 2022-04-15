@@ -30,6 +30,8 @@ const _render = index => {
             return <CarDetal />;
         case 1:
             return <CarOwner />;
+        case 2: 
+            return <CarGallery />;
         case 3:
             return <CarServices />;
         default:
@@ -143,6 +145,13 @@ const CarServices = () => {
             </div>
         </div>)}
     </React.Fragment>
+}
+
+const CarGallery = () => {
+    const { carData } = useContext(CarContext);
+    return <div style={{display: 'flex', flexFlow: 'row', gap: '1rem', flexWrap: 'wrap', margin: '1rem'}}>
+        {carData.images.map((image, index) => <div key={index}><img src={image.src} style={{width:'250px'}} alt={'image_'+index} /></div>)}
+    </div>
 }
 
 export default function CarSummary({stepActions}){
