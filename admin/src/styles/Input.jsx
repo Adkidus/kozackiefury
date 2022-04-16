@@ -23,6 +23,17 @@ export const Input = styled.input`
         color: ${color.white};
         font-family: "Advent Pro", cursive;
     }
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus, 
+    &:-webkit-autofill:active{
+        background-color: #000;
+        background: #000;
+        border: 1px solid ${color.gold};
+        color: ${color.white};
+        -webkit-text-fill-color: ${color.white} !important;
+        -webkit-box-shadow: 0 0 0 30px ${color.black} inset !important;
+    }
 `;
 
 export const Select = styled.select`

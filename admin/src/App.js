@@ -5,6 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
+  Navigate
 } from "react-router-dom";
 import { Outlet } from 'react-router';
 import Dashboard from "./pages/Dashboard";
@@ -16,28 +17,75 @@ import Settings from "./pages/Settings";
 import CarNew from "./pages/Cars/CarNew";
 import LoginPage from "./pages/LoginPage";
 
-const WithoutNav = () => <Outlet />
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import store from './store';
+import { authStart } from './store/auth/actions';
+
+const WithoutNav = () => <Outlet />;
+
+const ProtectedRoute = ({children}) => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  if(!auth.loading && auth.currentUser == null)
+    dispatch(authStart());
+  return auth.loading ? <div>LOADING</div> : auth.currentUser ? children : <Navigate to='/login' />
+}
 
 export default function App() {
   return (
-    <Div>
-      <Router>
-        <Routes>
-          <Route element={<WithoutNav />}>
-            <Route path="/login" element={<LoginPage />} />
-          </Route>
-          <Route element={<Sidebar />}>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="cars" element={<CarsList />}/>
-            <Route path='cars/new' element={<CarNew />} />
-            <Route path="reservations" element={<Reservations />} />
-            <Route path="asks" element={<Asks />} />
-            <Route path="team" element={<Team />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Routes>
-      </Router>
-    </Div>
+    <Provider store={store}>
+      <Div>
+        <Router>
+          <Routes>
+            <Route element={<WithoutNav />}>
+              <Route path="/login" element={<LoginPage />} />
+            </Route>
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Dashboard />
+              </ProtectedRoute>
+            }/>
+            <Route path="cars" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <CarsList />
+              </ProtectedRoute>
+            }/>
+            <Route path="cars/new" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <CarNew />
+              </ProtectedRoute>
+            }/>
+            <Route path="reservations" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Reservations />
+              </ProtectedRoute>
+            }/>
+            <Route path="asks" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Asks />
+              </ProtectedRoute>
+            }/>
+            <Route path="team" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Team />
+              </ProtectedRoute>
+            }/>
+            <Route path="settings" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Settings />
+              </ProtectedRoute>
+            }/>
+          </Routes>
+        </Router>
+      </Div>
+    </Provider>
   );
 }
 

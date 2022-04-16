@@ -10,7 +10,7 @@ const User = require('../models/User');
 // @access   Private
 router.get('/', auth, async (req, res) => {
   try {
-    let user = await User.findOne({_id : req.user.id}).select('email nick isVerified company')
+    let user = await User.findOne({_id : req.user.id}).select('firstName lastName email')
     if (!user) 
       throw new Error()
     res.send(user);
