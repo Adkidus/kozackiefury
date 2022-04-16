@@ -7,13 +7,15 @@ import { Input, LabelInput } from "../styles/Input";
 import { ButtonFill } from "../styles/Buttons";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logInStart } from '../store/auth/actions';
+import { logInStart, authStart } from '../store/auth/actions';
 
 export default function LoginPage(){
     const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
     useEffect(()=>{
+        // if(localStorage.getItem('token'))
+        //     dispatch(authStart());
         if(auth.currentUser)
             navigate('/')
     },[auth, navigate])

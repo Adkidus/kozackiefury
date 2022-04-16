@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     loading: false,
     currentUser: null,
     error: null,
+    authError: null
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -11,7 +12,8 @@ const authReducer = (state = INITIAL_STATE, action) => {
         case types.LOG_IN_START:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                authError: null,
             };
         case types.AUTH_START:
             return {
@@ -42,6 +44,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         case types.AUTH_FAILURE:
             return {
                 ...state,
+                authError: action.payload,
                 loading: false
             };
         case types.LOG_OUT:

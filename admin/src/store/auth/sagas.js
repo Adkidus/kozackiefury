@@ -39,12 +39,16 @@ export function* authToken(){
     try {
         if(!localStorage.getItem('token'))
             throw new Error()
-
         const authToken = localStorage.getItem('token')
         const user = yield auth(authToken);
         yield put(authSuccess(user));
     } catch (error) {
-        yield put(authFailure());
+        let err = null
+        if(localStorage.getItem('token')){
+            localStorage.removeItem('token')
+            err = 'Sesja wygasła'
+        }
+        yield put(authFailure(err));
     }
 }
 
