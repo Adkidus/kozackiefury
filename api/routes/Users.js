@@ -25,5 +25,17 @@ router.post('/registerUser', async(req,res) => {
     }
 })
 
+// @route    PATCH api/users
+// @desc     Register user
+// @access   Public
+router.patch('/update/:id', auth, async(req,res) => {
+    try {
+        let id = req.params.id;
+        await User.updateOne(id, req.body);
+        res.status(200).json({msg: 'Twoje dane zostały zaktualizowane!'});
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+})
 
 module.exports = router;

@@ -1,62 +1,84 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import {useSelector} from 'react-redux';
 import styled from 'styled-components'
 import { Action, Actions, ButtonFill, ButtonOutline } from '../styles/Buttons'
 import { Card, CardItem, Wrap } from '../styles/Card'
 import { Input, LabelInput } from '../styles/Input'
 import { Section } from '../styles/Section'
 
+import {PersonModel} from '../Models/Person';
+
 const Profile = () => {
-    const [edtiMode, setEditMode] = useState(false)
+    const auth = useSelector((state) => state.auth);
+    const [userData, setUserData] = useState(PersonModel);
+    const [editMode, setEditMode] = useState(false)
+
+    useEffect(()=>{
+        let user = {...auth.currentUser}
+        setUserData({...PersonModel, ...user})
+    },[auth])
+
+    const toggleEditMode = () => {
+        let user = {...auth.currentUser}
+        if(editMode)
+            setUserData({...PersonModel, ...user})
+        setEditMode(!editMode)
+    }
+    const handleSubmit = e => {
+        e.preventDefault()
+        setEditMode(!editMode)
+    }
+
     return  <Card>
         <div className='header'>
             <div className="title">
                 <h2 className='white'>Profil</h2>
             </div>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
             <div>
                 <Wrap>
                     <CardItem sm style={{padding: '1rem'}}>
                         <LabelInput>Imię</LabelInput>
                         {
-                            edtiMode ?   
-                            <Input /> :
-                            <div style={{padding: '1rem'}}>Lorem Ipsum</div>
+                            editMode ?   
+                            <Input type='text' value={userData.first_name} onChange={e=>setUserData({...userData, ...{first_name: e.target.value}})} /> :
+                            <div style={{padding: '1rem'}}>{userData.first_name}</div>
                         } 
                     </CardItem>
                     <CardItem sm style={{padding: '1rem'}}>
                         <LabelInput>Nazwisko</LabelInput>
                         {
-                            edtiMode ?   
-                            <Input /> :
-                            <div style={{padding: '1rem'}}>Lorem Ipsum</div>
+                            editMode ?   
+                            <Input value={userData.last_name} onChange={e=>setUserData({...userData, ...{last_name: e.target.value}})} /> :
+                            <div style={{padding: '1rem'}}>{userData.last_name}</div>
                         } 
                     </CardItem>
                     <CardItem sm style={{padding: '1rem'}}>
                         <LabelInput>Email</LabelInput>
                         {
-                            edtiMode ?   
-                            <Input /> :
-                            <div style={{padding: '1rem'}}>Lorem Ipsum</div>
+                            editMode ?   
+                            <Input type='email' value={userData.email} onChange={e=>setUserData({...userData, ...{email: e.target.value}})} /> :
+                            <div style={{padding: '1rem'}}>{userData.email}</div>
                         } 
                     </CardItem>
                     <CardItem sm style={{padding: '1rem'}}>
                         <LabelInput>Telefon</LabelInput>
                         {
-                            edtiMode ?   
-                            <Input /> :
-                            <div style={{padding: '1rem'}}>Lorem Ipsum</div>
+                            editMode ?   
+                            <Input type='tel' value={userData.phone} onChange={e=>setUserData({...userData, ...{phone: e.target.value}})} /> :
+                            <div style={{padding: '1rem'}}>{userData.phone}</div>
                         } 
                     </CardItem>
                 </Wrap>
             </div>
-            {edtiMode ? 
+            {editMode ? 
             <Actions>
-                <ButtonOutline type='button' onClick={()=>setEditMode(false)}>Anuluj</ButtonOutline>
-                <ButtonFill>Zapisz</ButtonFill>
+                <ButtonOutline type='button' onClick={toggleEditMode}>Anuluj</ButtonOutline>
+                <ButtonFill type='submit'>Zapisz</ButtonFill>
             </Actions> :
             <Action>
-                <ButtonFill type='button' onClick={()=>setEditMode(true)}>Edytuj</ButtonFill>
+                <ButtonFill type='button' onClick={toggleEditMode}>Edytuj</ButtonFill>
             </Action>}
         </form>
     </Card>

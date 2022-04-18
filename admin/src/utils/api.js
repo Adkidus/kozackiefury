@@ -1,10 +1,20 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// const api = axios.create({
-//     baseURL: 'http://localhost:5000',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-// });
+var API_URL;
+switch(process.env.NODE_ENV) {
+    case 'production':
+        API_URL = 'https://api.kozackiefury.pl';
+      break;
+    case 'development':
+    default:
+        API_URL = 'http://localhost:5000';
+  }
 
-// export default api;
+const api = axios.create({
+    baseURL: API_URL,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+});
+
+export default api;

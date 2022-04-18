@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../utils/api';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import {
@@ -10,7 +10,7 @@ import {
 import types from './types';
 
 const logIn = async (email, password) => {
-    const response = await axios.post('http://localhost:5000/auth/login', {
+    const response = await api.post('http://localhost:5000/auth/login', {
         email,
         password,
     });
@@ -31,7 +31,7 @@ export function* onLogInStart() {
 }
 
 const auth = async(token) => {
-    const response = await axios.get('http://localhost:5000/auth',{ headers: {"Authorization" : `Bearer ${token}`} })
+    const response = await api.get('http://localhost:5000/auth',{ headers: {"Authorization" : `Bearer ${token}`} })
     return response.data;
 }
 

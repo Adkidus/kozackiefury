@@ -1,3 +1,4 @@
+import setAuthToken from '../../utils/setAuthToken';
 import types from './types';
 
 const INITIAL_STATE = {
@@ -21,7 +22,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 loading: true
             };
         case types.LOG_IN_SUCCESS:
-            localStorage.setItem('token',action.payload.token)
+            setAuthToken(action.payload.token);
             return {
                 ...state,
                 currentUser: action.payload,
