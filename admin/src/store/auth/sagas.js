@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import setAuthToken from '../../utils/setAuthToken';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import {
@@ -45,7 +46,7 @@ export function* authToken(){
     } catch (error) {
         let err = null
         if(localStorage.getItem('token')){
-            localStorage.removeItem('token')
+            setAuthToken()
             err = 'Sesja wygasła'
         }
         yield put(authFailure(err));
