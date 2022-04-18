@@ -32,3 +32,18 @@ export const authFailure = (error) => ({
   type: types.AUTH_FAILURE,
   payload: error,
 });
+
+export const updateUser = (user) => ({
+  type: types.USER_UPDATE,
+  payload: user
+})
+
+export const updateUserSuccess = (user) => ({
+  type: types.USER_UPDATE_SUCCESS,
+  payload: user
+})
+
+export const updateUserFailure = (error) => ({
+  type: types.USER_UPDATE_FAILURE,
+  payload: error
+})

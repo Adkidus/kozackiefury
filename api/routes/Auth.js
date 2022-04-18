@@ -37,6 +37,7 @@ router.post('/login', async (req, res) => {
           .status(400)
           .json({ msg: 'Niepoprawne dane!'});
       }
+      const {_id, first_name, last_name, phone, role} = user;
       const payload = {
         user: {
           id: user.id,
@@ -49,7 +50,7 @@ router.post('/login', async (req, res) => {
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({ _id, first_name, last_name, email, phone, role, token});
         }
       );
     } catch (err) {

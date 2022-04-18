@@ -7,7 +7,7 @@ const User = require('../models/User');
 // @route    POST api/users
 // @desc     Register user
 // @access   Public
-router.post('/registerUser', async(req,res) => {
+router.post('/register', async(req,res) => {
     const { email, password } = req.body;
     const role = 'admin';
     try {
@@ -31,9 +31,13 @@ router.post('/registerUser', async(req,res) => {
 router.patch('/update/:id', auth, async(req,res) => {
     try {
         let id = req.params.id;
-        await User.updateOne(id, req.body);
+        if(req.user.id !== id || req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
+        const {first_name, last_name, email, phone} = req.body;
+        await User.updateOne({_id: id}, {first_name: first_name, last_name:last_name, email:email, phone:phone});
         res.status(200).json({msg: 'Twoje dane zostały zaktualizowane!'});
     } catch (error) {
+        console.log(error)
         res.status(500).send('Server error');
     }
 })

@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import styled from 'styled-components'
 import { Action, Actions, ButtonFill, ButtonOutline } from '../styles/Buttons'
 import { Card, CardItem, Wrap } from '../styles/Card'
 import { Input, LabelInput } from '../styles/Input'
 import { Section } from '../styles/Section'
 
+import { updateUser } from '../store/auth/actions';
 import {PersonModel} from '../Models/Person';
 
 const Profile = () => {
+    const dispatch = useDispatch();
     const auth = useSelector((state) => state.auth);
     const [userData, setUserData] = useState(PersonModel);
     const [editMode, setEditMode] = useState(false)
@@ -26,7 +28,7 @@ const Profile = () => {
     }
     const handleSubmit = e => {
         e.preventDefault()
-        setEditMode(!editMode)
+        dispatch(updateUser(userData));
     }
 
     return  <Card>

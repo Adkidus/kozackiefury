@@ -48,6 +48,11 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 authError: action.payload,
                 loading: false
             };
+        case types.USER_UPDATE_SUCCESS:
+            return {
+                ...state,
+                currentUser: action.payload
+            };
         case types.LOG_OUT:
             return INITIAL_STATE;
         default:
