@@ -92,7 +92,7 @@ export default function App() {
                 <Settings />
               </ProtectedRoute>
             }/>
-          <Route path='/*' element={<Navigate to="/" replace />} />
+          {/* <Route path='/*' element={<Navigate to="/" replace />} /> */}
           </Routes>
         </Router>
       </Div>

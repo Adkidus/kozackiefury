@@ -14,8 +14,9 @@ export default function LoginPage(){
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
     useEffect(()=>{
-        // if(localStorage.getItem('token'))
+        // if(localStorage.getItem('token') && !auth.currentUser)
         //     dispatch(authStart());
+        // else 
         if(auth.currentUser)
             navigate('/')
     },[auth, navigate])
