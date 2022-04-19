@@ -93,16 +93,16 @@ export default function Sidebar() {
               </li>
               {
                 isAdmin ?
-                  <li
+                <React.Fragment>
+                    <li
                     className={location.pathname.includes('asks') ? "active" : "none"}
                   >
                     <Link to='/asks'>
                       <FaWpforms />
                       <span> Zapytania</span>
                     </Link>
-                  </li>:''
-              }
-              <li
+                  </li>
+                              <li
               className={location.pathname.includes('team') ? "active" : "none"}
             >
               <Link to='/team'>
@@ -110,6 +110,9 @@ export default function Sidebar() {
                 <span> Team</span>
               </Link>
             </li>
+                </React.Fragment>
+                :''
+              }
               <li
                 className={location.pathname.includes('settings') ? "active" : "none"}
               >
@@ -157,23 +160,26 @@ export default function Sidebar() {
             </li>
             {
               isAdmin ?
-              <li
+              <React.Fragment>
+                <li
                 className={location.pathname.includes('/asks') ? "active" : "none"}
                 >
                   <Link to='/asks'>
                     <FaWpforms />
                     <span> Zapytania</span>
                   </Link>
-                </li>:''
+                </li> 
+                <li
+                  className={location.pathname.includes('/team') ? "active" : "none"}
+                >
+                  <Link to='/team'>
+                    <RiTeamFill />
+                    <span> Team</span>
+                  </Link>
+                </li>
+              </React.Fragment>
+              :''
             }
-            <li
-              className={location.pathname.includes('/team') ? "active" : "none"}
-            >
-              <Link to='/team'>
-                <RiTeamFill />
-                <span> Team</span>
-              </Link>
-            </li>
             <li
               className={location.pathname.includes('/settings') ? "active" : "none"}
             >
