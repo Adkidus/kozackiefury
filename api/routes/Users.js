@@ -41,7 +41,7 @@ router.patch('/update/:id', auth, async(req,res) => {
     }
 })
 
-// @route    PATCH api/setPassword
+// @route    PATCH /users/setPassword
 // @desc     Set user password
 // @access   Private
 router.patch('/setPassword', auth, async(req,res) => {

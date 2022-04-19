@@ -21,6 +21,9 @@ import { Provider, useSelector, useDispatch } from 'react-redux';
 import store from './store';
 import { authStart } from './store/auth/actions';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const WithoutNav = () => <Outlet />;
 
 const ProtectedRoute = ({children}) => {
@@ -85,6 +88,7 @@ export default function App() {
           </Routes>
         </Router>
       </Div>
+      <ToastContainer limit={3} />
     </Provider>
   );
 }
