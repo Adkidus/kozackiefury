@@ -61,7 +61,7 @@ export function* onAuthStart(){
 }
 
 const updateUserReq = async(user) => {
-    const res = await api.patch(`/users/update/${user._id}`, user)
+    await api.patch(`/users/update/${user._id}`, user)
     // console.log(res)
     // return response.data;
 }

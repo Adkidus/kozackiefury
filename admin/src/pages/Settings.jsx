@@ -16,15 +16,25 @@ const Profile = () => {
     const [editMode, setEditMode] = useState(false)
 
     useEffect(()=>{
+        if(auth.updateError)
+            return;
         let user = {...auth.currentUser}
         setUserData({...PersonModel, ...user})
+        toggleEditMode()
     },[auth])
 
-    const toggleEditMode = () => {
+    const toggleEditMode = e => {
+        // if(m && editMode)
+        //     setEditMode(false)
+        // else
+            setEditMode(!editMode)
+    }
+
+    const cancelEditMode = () => {
         let user = {...auth.currentUser}
         if(editMode)
             setUserData({...PersonModel, ...user})
-        setEditMode(!editMode)
+        toggleEditMode()
     }
     const handleSubmit = e => {
         e.preventDefault()
@@ -76,11 +86,11 @@ const Profile = () => {
             </div>
             {editMode ? 
             <Actions>
-                <ButtonOutline type='button' onClick={toggleEditMode}>Anuluj</ButtonOutline>
+                <ButtonOutline type='button' onClick={cancelEditMode}>Anuluj</ButtonOutline>
                 <ButtonFill type='submit'>Zapisz</ButtonFill>
             </Actions> :
             <Action>
-                <ButtonFill type='button' onClick={toggleEditMode}>Edytuj</ButtonFill>
+                <ButtonFill type='button' onClick={cancelEditMode}>Edytuj</ButtonFill>
             </Action>}
         </form>
     </Card>
