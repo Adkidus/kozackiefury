@@ -4,13 +4,25 @@ const bcrypt = require('bcryptjs');
 const auth = require('../middleware/auth');
 const User = require('../models/User');
 
+router.get('/list', auth, async(req,res) => {
+    try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
+        const users = await User.find().select('_id first_name last_name email phone role createdAt');
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+})
+
 // @route    POST api/users
 // @desc     Register user
 // @access   Public
-router.post('/register', async(req,res) => {
-    const { email, password } = req.body;
-    const role = 'admin';
+router.post('/register', auth, async(req,res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
+        const { email, password, role } = req.body;
         let user = await User.findOne({ email });
         if (user) return res.status(400).json({ msg: 'Adres E-mail jest już zajęty.' });
         user = new User({ email, password, role: role});
