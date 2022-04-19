@@ -8,14 +8,17 @@ import { FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import scrollreveal from "scrollreveal";
-import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from "react-router-dom";
+import {useSelector} from 'react-redux'
 
 export default function Sidebar() {
   const location = useLocation();
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
   html.addEventListener("click", () => setNavbarState(false));
+
+  const auth = useSelector((state) => state.auth);
+  const isAdmin = auth.currentUser.role === 'admin';
 
   useEffect(() => {
     const sr = scrollreveal({
@@ -88,14 +91,17 @@ export default function Sidebar() {
                   <span> Rezerwacje</span>
                 </Link>
               </li>
-              <li
-                className={location.pathname.includes('asks') ? "active" : "none"}
-              >
-                <Link to='/asks'>
-                  <FaWpforms />
-                  <span> Zapytania</span>
-                </Link>
-              </li>
+              {
+                isAdmin ?
+                  <li
+                    className={location.pathname.includes('asks') ? "active" : "none"}
+                  >
+                    <Link to='/asks'>
+                      <FaWpforms />
+                      <span> Zapytania</span>
+                    </Link>
+                  </li>:''
+              }
               <li
               className={location.pathname.includes('team') ? "active" : "none"}
             >
@@ -149,14 +155,17 @@ export default function Sidebar() {
                 <span> Rezerwacje</span>
               </Link>
             </li>
-            <li
-              className={location.pathname.includes('/asks') ? "active" : "none"}
-            >
-              <Link to='/asks'>
-                <FaWpforms />
-                <span> Zapytania</span>
-              </Link>
-            </li>
+            {
+              isAdmin ?
+              <li
+                className={location.pathname.includes('/asks') ? "active" : "none"}
+                >
+                  <Link to='/asks'>
+                    <FaWpforms />
+                    <span> Zapytania</span>
+                  </Link>
+                </li>:''
+            }
             <li
               className={location.pathname.includes('/team') ? "active" : "none"}
             >
