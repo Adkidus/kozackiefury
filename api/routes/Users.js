@@ -27,7 +27,7 @@ router.post('/register', async(req,res) => {
 
 // @route    PATCH api/users
 // @desc     Register user
-// @access   Public
+// @access   Private
 router.patch('/update/:id', auth, async(req,res) => {
     try {
         let id = req.params.id;
@@ -37,7 +37,28 @@ router.patch('/update/:id', auth, async(req,res) => {
         await User.updateOne({_id: id}, {first_name: first_name, last_name:last_name, email:email, phone:phone});
         res.status(200).json({msg: 'Twoje dane zostały zaktualizowane!'});
     } catch (error) {
-        console.log(error)
+        res.status(500).send('Server error');
+    }
+})
+
+// @route    PATCH api/setPassword
+// @desc     Set user password
+// @access   Private
+router.patch('/setPassword', auth, async(req,res) => {
+    try {
+        let {password, newPassword, rePassword} = req.body;
+        if(newPassword !== rePassword)
+            return res.status(400).json({msg: 'Hasła nie są takie same!'});
+        let user = await User.findOne({ _id: req.user.id });
+        if (!user)
+            return res.status(400).json({msg: 'Niepoprawne dane!'});
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) 
+            return res.status(400).json({ msg: 'Niepoprawne dane!'});
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(newPassword, salt);
+        res.status(200).json({msg: 'Twoje hasło zostało zmienione!'});
+    } catch (error) {
         res.status(500).send('Server error');
     }
 })

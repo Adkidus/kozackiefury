@@ -8,6 +8,7 @@ import { Section } from '../styles/Section'
 
 import { updateUser } from '../store/auth/actions';
 import {PersonModel} from '../Models/Person';
+import Password from '../components/Password';
 
 const Profile = () => {
     const dispatch = useDispatch();
@@ -89,35 +90,6 @@ const Profile = () => {
             <Action>
                 <ButtonFill type='button' onClick={cancelEditMode}>Edytuj</ButtonFill>
             </Action>}
-        </form>
-    </Card>
-}
-
-const Password = () => {
-    return  <Card>
-        <div className='header'>
-            <div className="title">
-                <h2 className='white'>Zmień Hasło</h2>
-            </div>
-        </div>
-        <form>
-            <Wrap style={{flexFlow: 'column'}}>
-                <div style={{padding: '1rem', display: 'flex', flexFlow: 'column'}}>
-                    <LabelInput>Aktualne Hasło</LabelInput>
-                    <Input type='password' />
-                </div>
-                <div style={{padding: '1rem', display: 'flex', flexFlow: 'column'}}>
-                    <LabelInput>Nowe Hasło</LabelInput>
-                    <Input type='password' />
-                </div>
-                <div style={{padding: '1rem', display: 'flex', flexFlow: 'column'}}>
-                    <LabelInput>Powtórz Hasło</LabelInput>
-                    <Input type='password' />
-                </div>
-                <Action>
-                    <ButtonFill>Zapisz</ButtonFill>
-                </Action>
-            </Wrap>
         </form>
     </Card>
 }
