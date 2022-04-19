@@ -6,6 +6,9 @@ import * as color from '../styles/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUsers } from '../store/team/actions';
 import Person from '../components/Person';
+import { Link } from 'react-router-dom';
+import { ButtonOutline } from '../styles/Buttons';
+import {GoPlus} from 'react-icons/go'
 
 export default function Team() {
     const dispatch = useDispatch();
@@ -19,6 +22,12 @@ export default function Team() {
                 <div className="title">
                     <h2>Team</h2>
                 </div>
+                <Link to='/team/new'>
+                    <ButtonOutline>
+                        <GoPlus />
+                        Dodaj
+                    </ButtonOutline>
+                </Link>
             </div>
         </Card>
         <TeamList>

@@ -15,6 +15,8 @@ export const Card = styled.section`
     align-items: 'center';
   }
   .title {
+    display: flex;
+    align-items: center;
     h2 {
       color: ${color.gold};
       font-family: "Advent Pro", cursive;

@@ -16,6 +16,7 @@ import Team from "./pages/Team";
 import Settings from "./pages/Settings";
 import CarNew from "./pages/Cars/CarNew";
 import LoginPage from "./pages/LoginPage";
+import TeamNew from "./pages/TeamNew";
 
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import store from './store';
@@ -77,6 +78,12 @@ export default function App() {
               <ProtectedRoute>
                 <Sidebar />
                 <Team />
+              </ProtectedRoute>
+            }/>
+            <Route path="team/new" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <TeamNew />
               </ProtectedRoute>
             }/>
             <Route path="settings" element={
