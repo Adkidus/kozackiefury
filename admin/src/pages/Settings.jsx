@@ -20,14 +20,11 @@ const Profile = () => {
             return;
         let user = {...auth.currentUser}
         setUserData({...PersonModel, ...user})
-        toggleEditMode()
+        setEditMode(false)
     },[auth])
 
-    const toggleEditMode = e => {
-        // if(m && editMode)
-        //     setEditMode(false)
-        // else
-            setEditMode(!editMode)
+    const toggleEditMode = () => {
+        setEditMode(!editMode)
     }
 
     const cancelEditMode = () => {

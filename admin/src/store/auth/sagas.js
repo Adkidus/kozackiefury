@@ -67,7 +67,6 @@ const updateUserReq = async(user) => {
 }
 
 export function* updateUser({payload}){
-    console.log(payload)
     try {
         yield updateUserReq(payload);
         yield put(updateUserSuccess(payload))
