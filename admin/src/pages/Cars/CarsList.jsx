@@ -34,7 +34,7 @@ const CarsListItem = ({car}) => {
     return <CardListItem className='cardListItem'>
         <ListItem>
             <div>
-                <img src={car.img} alt={car.brand} />
+                <img src={car.photos[0]?.location} alt={car.brand} />
             </div>
             <div className='detail'>
                 <div className='header'>
@@ -47,9 +47,9 @@ const CarsListItem = ({car}) => {
                     <CarSpecItem title='0-100 km/h' value= {car.to_100 + 's'} icon={<BsSpeedometer />} />
                 </div>
             </div>
-            <div className='actions'>
+            {/* <div className='actions'>
                 <FiArrowRight />
-            </div>
+            </div> */}
         </ListItem>
     </CardListItem>
 }
@@ -91,16 +91,27 @@ export default function CarsList() {
                 </Link>
             </div>
         </Card>
-        <div style={{marginTop: '2rem', display: 'flex', flexFlow: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
+        <Container>
             {
                 cars.loading? 'LOADING' :
                 cars.error? 'Error' : 
                 cars.carsList.length < 1? <div style={{margin: '1rem', color: '#fff'}}>Brak danych</div>:
                 cars.carsList.map(item => <CarsListItem key={item._id} car={item} />)
             }
-        </div>
+        </Container>
     </Section>
 };
+
+const Container = styled.div`
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    @media screen and (max-width: 1080px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+`;
 
 const ListItem = styled.div`
     position: relative;
