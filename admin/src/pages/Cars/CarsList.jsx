@@ -121,10 +121,14 @@ const ListItem = styled.div`
     img{
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         max-width: 350px;
         border-top-left-radius: 1rem;
         border-bottom-left-radius: 1rem;
+        max-height: 240px;
+        @media screen and (max-width: 700px) {
+            display: none;
+        }
     }
     .detail{
         padding: 1.5rem 2rem;
@@ -191,7 +195,7 @@ const CardListItem = styled.section`
     background-color: ${color.lightDark};
     color: ${color.white};
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 1rem;
     animation: fade-in 2000ms;
     @keyframes fade-in {
