@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import { Section } from '../../styles/Section'
 import { Card } from '../../styles/Card'
 import styled from 'styled-components'
 import * as color from '../../styles/Colors';
 import { ButtonOutline } from '../../styles/Buttons'
-import { Link } from 'react-router-dom'
 
 import CarGallery from '../../components/Car/CarGallery'
 import CarSummary from '../../components/Car/CarSummary'
 import CarForm from '../../components/Car/CarForm';
 import CarOwner from '../../components/Car/CarOwner';
 import CarServices from '../../components/Car/CarServices';
+
 import { CarContext } from '../../Providers/CarContext';
 
 const renderSwitch = (step, stepActions) => {
@@ -26,7 +28,7 @@ const renderSwitch = (step, stepActions) => {
         case 4: 
             return <CarSummary stepActions={stepActions} />
         default:
-            return <div>krok {step + 1}</div>;
+            return <div>{step + 1}</div>;
     }
 }
 

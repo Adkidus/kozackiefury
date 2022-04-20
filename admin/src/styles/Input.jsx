@@ -58,3 +58,9 @@ export const Select = styled.select`
         font-family: "Advent Pro", cursive;
     }
 `;
+
+export const Error = styled.p`
+    color: ${color.red};
+    margin-left: 0.5rem;
+    margin-top: 0.25rem;
+`;

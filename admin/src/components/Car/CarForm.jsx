@@ -1,8 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 import { CarContext } from '../../Providers/CarContext';
 import { Actions, ButtonFill } from '../../styles/Buttons';
 import { CardItem } from '../../styles/Card';
-import { Input, LabelInput, Select } from '../../styles/Input';
+import { Input, LabelInput, Select, Error } from '../../styles/Input';
+
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+const schema = yup.object({
+    brand: yup.string().required('Pole nie moe być puste!'),
+    model: yup.string().required('Pole nie moe być puste!'),
+    horse_power: yup.string().required('Pole nie moe być puste!'),
+    engine: yup.string().required('Pole nie moe być puste!'),
+    to_100: yup.string().required('Pole nie moe być puste!'),
+    category: yup.string().required('Pole nie moe być puste!'),
+}).required();
 
 const carModel = {
     brand: '',
@@ -14,59 +27,70 @@ const carModel = {
 }
 
 const CarForm = ({nextStep}) => {
-    const [carForm, setCarForm] = useState(carModel);
-    const { carData, setCarData } = useContext(CarContext);
+    const {carData, setCarData} = useContext(CarContext);
+    const {handleSubmit, register, reset, formState:{ errors }} = useForm({
+        resolver: yupResolver(schema)
+    });
 
     useEffect(()=>{
         if(carData?.details){
-            setCarForm(carData.details)
+            resetData()
         }else{
             setCarData({
                 ...carData,
                 ...{details: carModel}
             })
         }
-    },[carData, setCarData])
+    },[carData, setCarData])// eslint-disable-line react-hooks/exhaustive-deps
 
-    const submitForm = e => {
-        e.preventDefault();
-        setCarData({
-            ...carData,
-            ...{details: carForm}
-        })
-        nextStep()
+    const resetData = () => {
+        reset(carData.details)
     }
 
-    return <form onSubmit={submitForm}>
+    const submitForm = data => {
+        setCarData({
+            ...carData,
+            ...{details: data}
+        })
+        nextStep()
+    };
+
+    return <form onSubmit={handleSubmit(submitForm)}>
         <div style={{display: 'flex',flexDirection: 'row', flexWrap: 'wrap', gap: 0}}>
             <CardItem>
                 <LabelInput>Marka</LabelInput>
-                <Input type='text' value={carForm.brand} onChange={e=>setCarForm({...carForm, ...{brand: e.target.value}})} />
+                <Input type='text' {...register("brand")} />
+                <Error>{errors.brand?.message}</Error>
             </CardItem>
             <CardItem>
                 <LabelInput>Model</LabelInput>
-                <Input type='text' value={carForm.model} onChange={e=>setCarForm({...carForm, ...{model: e.target.value}})} />
+                <Input type='text' {...register("model")} />
+                <Error>{errors.model?.message}</Error>
             </CardItem>
             <CardItem>
                 <LabelInput>Moc (KM)</LabelInput>
-                <Input type='text' value={carForm.horse_power} onChange={e=>setCarForm({...carForm, ...{horse_power: e.target.value}})} />
+                <Input type='text' {...register("horse_power")} />
+                <Error>{errors.horse_power?.message}</Error>
             </CardItem>
             <CardItem>
                 <LabelInput>Silnik</LabelInput>
-                <Input type='text' value={carForm.engine} onChange={e=>setCarForm({...carForm, ...{engine: e.target.value}})} />
+                <Input type='text' {...register("engine")} />
+                <Error>{errors.engine?.message}</Error>
             </CardItem>
             <CardItem>
                 <LabelInput>0-100km/h</LabelInput>
-                <Input type='text'  value={carForm.to_100} onChange={e=>setCarForm({...carForm, ...{to_100: e.target.value}})} />
+                <Input type='text' {...register("to_100")} />
+                <Error>{errors.to_100?.message}</Error>
             </CardItem>
             <CardItem>
                 <LabelInput>Kategoria</LabelInput>
-                <Select value={carForm.category} onChange={e=>setCarForm({...carForm, ...{category: e.target.value}})}>
+                <Select {...register("category")}>
                     <option value=''></option>
                     <option value='Fast&Furious'>Fast&Furious</option>
                     <option value='Luxury&Business'>Luxury&Business</option>
                     <option value='Retro&Soul'>Retro&Soul</option>
                 </Select>
+                <Error>{errors.category?.message}</Error>
             </CardItem>
         </div>
         <Actions>
