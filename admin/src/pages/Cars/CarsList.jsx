@@ -47,9 +47,6 @@ const CarsListItem = ({car}) => {
                     <CarSpecItem title='0-100 km/h' value= {car.to_100 + 's'} icon={<BsSpeedometer />} />
                 </div>
             </div>
-            {/* <div className='actions'>
-                <FiArrowRight />
-            </div> */}
         </ListItem>
     </CardListItem>
 }
