@@ -32,7 +32,7 @@ const upload = multer({
 router.post('/new', auth, async (req, res) => {
     try {
         let newCar = req.body;
-        let carPathName = `${newCar.brand} ${newCar.model}`;
+        let carPathName = `${newCar.brand} ${newCar.model} ${Math.random().toString(36).slice(2, 6)}`;
         newCar.pathName = carPathName.toLowerCase().split(' ').join('-')
         const car = new Car(newCar)
         await car.save()
@@ -42,12 +42,16 @@ router.post('/new', auth, async (req, res) => {
     }
 })
 
-router.post('/uploadImage/:carId', auth, upload.array('fileUpload',1), async(req, res) => {
+router.post('/uploadImage/:carId', auth, upload.array('fileUpload'), async(req, res) => {
     try {
         const car = await Car.findOne({_id: req.params.carId})
-        car.photos.push({key: req.files[0].key, location: req.files[0].location})
+        req.files.forEach(img => {
+            car.photos.push({key: img.key, location: img.location})
+        });
+        //        car.photos.push({key: req.files[0].key, location: req.files[0].location})
         await car.save()
-        res.status(201).send('Successfully uploaded ' + req.files.length + ' files!');
+        //'Successfully uploaded ' + req.files.length + ' files!'
+        res.status(201).send(car);
     } catch (e) {
         res.status(500).json({msg:'Error: ' + e.message});
     }

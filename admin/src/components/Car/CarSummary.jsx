@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import * as color from '../../styles/Colors';
 import { ButtonFill, ButtonOutline, Actions } from '../../styles/Buttons'
 import {AiOutlineDown, AiOutlineUp} from 'react-icons/ai';
+import api from '../../utils/api';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const ItemHeader = ({step, toggle}) => {   
     let {title, index, display} = step;
@@ -112,6 +115,15 @@ const CarOwner = () => {
                 <label>Email</label>
                 <div className='val'>{email}</div>
             </div>
+            <div className='item m-none'></div>
+            {
+                carData.owner._id === '' ? 
+                <div className='item'>
+                    <label>Hasło</label>
+                    <div className='val'>{carData.owner.password}</div>
+                </div>
+                : ''
+            }
         </div>
     </React.Fragment>
 }
@@ -155,11 +167,52 @@ const CarGallery = () => {
 }
 
 export default function CarSummary({stepActions}){
+    const navigate = useNavigate()
+    const { carData } = useContext(CarContext);
     const [steps, setSteps] = useState(_steps);
     const toggle = index => {
         let _steps = [...steps]
         _steps[index].display = !steps[index].display
         setSteps(_steps)
+    }
+    const saveCar = async () => {
+        let userId = carData.owner._id
+        if(userId === ''){
+            let {first_name, last_name, email, phone, password} = carData.owner;
+            try {
+                let res = await api.post('/users/register', {
+                    ...{first_name, last_name, email, phone, password},
+                    ...{role: 'user'}
+                })
+                userId = res.data.user._id
+            } catch (error) {
+                toast.error('Nie udało się utworzyć konta!', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                return;
+            }
+        }
+        try {
+            let obj = {...carData.details}
+            obj.services = [...carData.services]
+            obj.userId = userId;
+            let res = await api.post('/cars/new', obj);   
+            let carId = res.data._id;
+            let images = [...carData.images]
+            let formData = new FormData();
+            for (const image of images) {
+                formData.append('fileUpload', image.file)
+            }
+            await api.post(`/cars/uploadImage/${carId}`,formData)
+            toast.success(`Dodano ${obj.brand} ${obj.model}!`, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            navigate('/cars');
+        } catch (error) {
+            toast.error(error.response.data.msg, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        }
     }
     return <div>
         <Div>
@@ -172,7 +225,7 @@ export default function CarSummary({stepActions}){
         </Div>
         <Actions>
             <ButtonOutline type='button' onClick={()=>stepActions(false)}>Cofnij</ButtonOutline>
-            <ButtonFill type='button'>Zapisz</ButtonFill>
+            <ButtonFill type='button' onClick={saveCar}>Zapisz</ButtonFill>
         </Actions>
     </div>
 }

@@ -78,7 +78,7 @@ export default function TeamNew(){
                 </CardItem>
                 <CardItem>
                     <LabelInput>Nazwisko</LabelInput>
-                    <Input type='text' value={formData.last_name} name='last_name' onChange={change} required />
+                    <Input type='text' value={formData.last_name} name='last_name' onChange={change} />
                 </CardItem>
                 <CardItem>
                     <LabelInput>Email</LabelInput>
@@ -86,7 +86,7 @@ export default function TeamNew(){
                 </CardItem>
                 <CardItem>
                     <LabelInput>Phone</LabelInput>
-                    <Input type='tel' value={formData.phone} name='phone' onChange={change} required />
+                    <Input type='tel' value={formData.phone} name='phone' onChange={change} />
                 </CardItem>
                 <CardItem>
                     <LabelInput>Rola</LabelInput>

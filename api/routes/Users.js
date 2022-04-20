@@ -30,7 +30,7 @@ router.post('/register', auth, async(req,res) => {
         user.password = await bcrypt.hash(password, salt);
         await user.save(function (err) {
             if (err) return res.status(500).send({ msg: err.message });
-            res.status(200).send({ msg: 'Konto zostało utworzone!' });
+            res.status(200).send({ msg: 'Konto zostało utworzone!', user: user });
         });
     } catch (error) {
         res.status(500).send('Server error');
