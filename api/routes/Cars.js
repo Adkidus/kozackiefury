@@ -20,7 +20,8 @@ const upload = multer({
         let fileObj = {
             "image/png": ".png",
             "image/jpeg": ".jpeg",
-            "image/jpg": ".jpg"
+            "image/jpg": ".jpg",
+            "image/webp": ".webp"
         };
         let fileName = Date.now().toString()+fileObj[file.mimetype];
         cb(null, fileName)
@@ -42,9 +43,9 @@ router.post('/new', auth, async (req, res) => {
 })
 
 router.post('/uploadImage/:carId', auth, upload.array('fileUpload',1), async(req, res) => {
-    const car = await Car.findOne({_id: req.params.carId})
-    car.photos.push({key: req.files[0].key, location: req.files[0].location})
     try {
+        const car = await Car.findOne({_id: req.params.carId})
+        car.photos.push({key: req.files[0].key, location: req.files[0].location})
         await car.save()
         res.status(201).send('Successfully uploaded ' + req.files.length + ' files!');
     } catch (e) {
@@ -67,6 +68,8 @@ router.get('/list', auth, async (req, res) => {
         let cars = [];
         if(req.user.role === 'admin')
             cars = await Car.find({})
+        else
+            cars = await Car.find({userId: req.user.id});
         res.status(200).json(cars); 
     } catch (error) {
         res.status(500).json({msg:'Error: ' + e.message});

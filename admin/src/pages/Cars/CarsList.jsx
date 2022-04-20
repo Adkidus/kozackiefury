@@ -11,19 +11,8 @@ import {FiArrowRight} from 'react-icons/fi'
 import {GoPlus} from 'react-icons/go'
 import scrollreveal from "scrollreveal";
 import { Link } from 'react-router-dom';
-
-const cars = [
-    {
-        _id: "61cec9000255746a41261bd0",
-        active: false,
-        img: 'https://kozackiefury.s3.eu-central-1.amazonaws.com/1640941866576.webp',
-        brand: "Maserati",
-        model: "GranTurismo Sport",
-        engine: "V8",
-        horse_power: "460",
-        to_100: "4.5",
-    }
-]
+import { useDispatch, useSelector } from 'react-redux';
+import { getCars } from '../../store/cars/actions';
 
 const CarSpecItem = ({title, value, icon}) => {
     return <div className='carSpecItem'>
@@ -66,6 +55,8 @@ const CarsListItem = ({car}) => {
 }
 
 export default function CarsList() {
+    const dispatch = useDispatch();
+    const cars = useSelector((state) => state.cars);
     useEffect(() => {
         const sr = scrollreveal({
           origin: "bottom",
@@ -82,7 +73,10 @@ export default function CarsList() {
             interval: 100,
           }
         );
-      }, []);
+    }, []);
+    useEffect(()=>{
+        dispatch(getCars())
+    },[dispatch])
     return <Section>
         <Card>
             <div className='header'>
@@ -98,7 +92,12 @@ export default function CarsList() {
             </div>
         </Card>
         <div style={{marginTop: '2rem', display: 'flex', flexFlow: 'row', flexWrap: 'wrap', justifyContent: 'space-between'}}>
-            {cars.map(car => <CarsListItem key={car._id} car={car} />)}
+            {
+                cars.loading? 'LOADING' :
+                cars.error? 'Error' : 
+                cars.carsList.length < 1? <div style={{margin: '1rem', color: '#fff'}}>Brak danych</div>:
+                cars.carsList.map(item => <CarsListItem key={item._id} car={item} />)
+            }
         </div>
     </Section>
 };

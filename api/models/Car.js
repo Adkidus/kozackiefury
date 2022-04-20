@@ -56,7 +56,11 @@ const CarSchema = new Schema({
     owner_first_name: String,
     owner_last_name: String,
     owner_email: String,
-    owner_phone: String
+    owner_phone: String,
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }
 }, {
     timestamps: true
 });
