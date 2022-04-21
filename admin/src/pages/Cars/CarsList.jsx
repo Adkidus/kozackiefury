@@ -31,21 +31,29 @@ const CarSpecItem = ({title, value, icon}) => {
 } 
 
 const CarsListItem = ({car}) => {
+    const open = () => {
+        console.log('open',car)
+    }
     return <CardListItem className='cardListItem'>
         <ListItem>
-            <div>
-                <img src={car.photos[0]?.location} alt={car.brand} />
+            <div className='left'>
+                <div>
+                    <img src={car.photos[0]?.location} alt={car.brand} />
+                </div>
+                <div className='detail'>
+                    <div className='header'>
+                        <h2>{car.brand}</h2>
+                        <h1>{car.model}</h1>
+                    </div>
+                    <div className='carSpec'>
+                        <CarSpecItem title='silnik' value={car.engine} icon={<ImPower />} />
+                        <CarSpecItem title='moc' value={car.horse_power + 'KM'} icon={<GiHorseHead />} />
+                        <CarSpecItem title='0-100 km/h' value= {car.to_100 + 's'} icon={<BsSpeedometer />} />
+                    </div>
+                </div>
             </div>
-            <div className='detail'>
-                <div className='header'>
-                    <h2>{car.brand}</h2>
-                    <h1>{car.model}</h1>
-                </div>
-                <div className='carSpec'>
-                    <CarSpecItem title='silnik' value={car.engine} icon={<ImPower />} />
-                    <CarSpecItem title='moc' value={car.horse_power + 'KM'} icon={<GiHorseHead />} />
-                    <CarSpecItem title='0-100 km/h' value= {car.to_100 + 's'} icon={<BsSpeedometer />} />
-                </div>
+            <div className='arrow' onClick={open}>
+                <FiArrowRight />
             </div>
         </ListItem>
     </CardListItem>
@@ -118,6 +126,26 @@ const ListItem = styled.div`
     display: flex;
 	flex-direction: row;
     border-radius: 1px;
+    justify-content: space-between;
+    width: 100%;
+    .left{
+        display: flex;
+        flex-flow: row;
+        flex-wrap: wrap;
+    }
+    .arrow{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        padding: 1rem;
+        svg{
+            cursor: pointer;
+        }
+        svg:hover{
+            color: ${color.gold};
+        }
+    }
     img{
         width: 100%;
         height: 100%;

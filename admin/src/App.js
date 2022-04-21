@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import Asks from "./pages/Asks";
 import Reservations from "./pages/Reservations";
 import CarsList from "./pages/Cars/CarsList";
+import CarDetail from "./pages/Cars/CarDetail";
 import Team from "./pages/Team";
 import Settings from "./pages/Settings";
 import CarNew from "./pages/Cars/CarNew";
@@ -60,6 +61,12 @@ export default function App() {
               <ProtectedRoute>
                 <Sidebar />
                 <CarNew />
+              </ProtectedRoute>
+            }/>
+            <Route path="car/:id" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <CarDetail />
               </ProtectedRoute>
             }/>
             <Route path="reservations" element={
