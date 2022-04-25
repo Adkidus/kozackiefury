@@ -3,7 +3,7 @@ import { CarContext } from '../../Providers/CarContext';
 import styled from "styled-components";
 import * as color from '../../styles/Colors';
 import { CardItem } from '../../styles/Card';
-import { Input, LabelInput } from '../../styles/Input';
+import { Input, LabelInput, TextArea } from '../../styles/Input';
 import { Actions, ButtonFill, ButtonOutline } from '../../styles/Buttons';
 import {FaTrash} from 'react-icons/fa'
 import {FaPlus} from 'react-icons/fa'
@@ -53,7 +53,7 @@ const CarServices = ({stepActions}) => {
         stepActions()
     }
     return <div>
-    <div style={{display: 'flex',flexDirection: 'row', flexWrap: 'wrap', gap: 0}}>
+    <div style={{display: 'flex',flexDirection: 'column', flexWrap: 'wrap', gap: 0}}>
         {services.map((service,index) => <CardItem key={index}>
             <ServiceItem>
                 <div className='trash' onClick={()=>deleteService(index)}>
@@ -71,6 +71,10 @@ const CarServices = ({stepActions}) => {
                             <LabelInput>Cena</LabelInput>
                             <Input type='text' value={service.price} name='price' onChange={e=>change(e, index)} />
                         </CardItem>
+                    </div>
+                    <div style={{display: 'flex', flexFlow: 'column', width: '100%'}}>
+                        <LabelInput>Opis</LabelInput>
+                        <TextArea rows="5" value={service.description} name='description' onChange={e=>change(e, index)} />
                     </div>
                 </div>
             </ServiceItem>

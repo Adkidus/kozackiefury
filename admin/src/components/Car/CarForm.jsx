@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react'
 import { CarContext } from '../../Providers/CarContext';
 import { Actions, ButtonFill } from '../../styles/Buttons';
 import { CardItem } from '../../styles/Card';
-import { Input, LabelInput, Select, Error } from '../../styles/Input';
+import { Input, LabelInput, Select, Error, TextArea } from '../../styles/Input';
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -23,7 +23,8 @@ const carModel = {
     horse_power: '',
     engine: '',
     to_100: '',
-    category: ''
+    category: '',
+    description: ''
 }
 
 const CarForm = ({nextStep}) => {
@@ -92,6 +93,10 @@ const CarForm = ({nextStep}) => {
                 </Select>
                 <Error>{errors.category?.message}</Error>
             </CardItem>
+            <div style={{display: 'flex', flexFlow: 'column', width: '100%'}}>
+                <LabelInput>Opis</LabelInput>
+                <TextArea {...register("description")} rows="10" />
+            </div>
         </div>
         <Actions>
             <ButtonFill type='submit'>Dalej</ButtonFill>

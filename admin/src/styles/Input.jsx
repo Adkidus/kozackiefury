@@ -64,3 +64,32 @@ export const Error = styled.p`
     margin-left: 0.5rem;
     margin-top: 0.25rem;
 `;
+
+export const TextArea = styled.textarea`
+    background-color: #000;
+    border-radius: 1rem;
+    border: 1px solid ${color.gold};
+    color: ${color.white};
+    font-family: "Advent Pro", cursive;
+    letter-spacing: 0.2rem;
+    padding: 1rem;
+    width: 100%;
+    &:focus {
+        outline: none;
+    }
+    &::placeholder {
+        color: ${color.white};
+        font-family: "Advent Pro", cursive;
+    }
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus, 
+    &:-webkit-autofill:active{
+        background-color: #000;
+        background: #000;
+        border: 1px solid ${color.gold};
+        color: ${color.white};
+        -webkit-text-fill-color: ${color.white} !important;
+        -webkit-box-shadow: 0 0 0 30px ${color.black} inset !important;
+    }
+`;
