@@ -9,9 +9,8 @@ export default function CarDetail(){
     const carId = params.id
     const cars = useSelector((state) => state.cars);
     useEffect(()=>{
-        if(!cars.selectedCar){
+        if(!cars.selectedCar)
             dispatch(getCar({carId:carId}))
-        }
-    },[cars, dispatch,carId])
+    },[cars, dispatch, carId])
     return <div style={{color:'#fff'}}>CarDetail</div>
 }
