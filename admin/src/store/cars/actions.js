@@ -14,7 +14,17 @@ export const getCarsFail = (error) => ({
   payload: error,
 });
 
+export const getCar = (id) => ({
+  type: types.GET_CAR,
+  payload: id
+});
+
 export const selectCar = (car) => ({
    type: types.SELECT_CAR,
    payload: car
-})
+});
+
+export const getCarFail = (error) => ({
+  type: types.GET_CAR_FAIL,
+  payload: error
+});

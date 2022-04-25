@@ -66,6 +66,8 @@ const CarsListItem = ({car}) => {
 export default function CarsList() {
     const dispatch = useDispatch();
     const cars = useSelector((state) => state.cars);
+    const auth = useSelector((state) => state.auth);
+    const isAdmin = auth.currentUser.role === 'admin';
     useEffect(() => {
         const sr = scrollreveal({
           origin: "bottom",
@@ -92,12 +94,13 @@ export default function CarsList() {
                 <div className="title">
                     <h2>Flota</h2>
                 </div>
+                {!isAdmin?'':
                 <Link to='/cars/new'>
                     <ButtonOutline>
                         <GoPlus />
                         Dodaj
                     </ButtonOutline>
-                </Link>
+                </Link>}
             </div>
         </Card>
         <Container>

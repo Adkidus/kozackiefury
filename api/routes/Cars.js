@@ -80,7 +80,7 @@ router.get('/list', auth, async (req, res) => {
     }
 })
 
-router.get('/carById/:carId', async (req, res) => {
+router.get('/byId/:carId', async (req, res) => {
     try {
         const car = await Car.findOne({_id: req.params.carId})
         res.status(200).json(car); 

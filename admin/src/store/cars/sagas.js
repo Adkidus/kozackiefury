@@ -2,7 +2,9 @@ import api from '../../utils/api';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import {
     getCarsSuccess,
-    getCarsFail
+    getCarsFail,
+    selectCar,
+    getCarFail
 } from './actions';
 import types from './types';
 
@@ -24,8 +26,27 @@ export function* onGetCarsStart() {
     yield takeLatest(types.GET_CARS, getCars);
 }
 
+const getCarReq = async (id) => {
+    const response = await api.get(`/cars/byId/${id}`);
+    return response.data;
+};
+
+export function* getCar({ payload: { carId } }){
+    try {
+        const car = yield getCarReq(carId);
+        yield put(selectCar(car));
+    } catch (error) {
+        yield put(getCarFail(error.response.data.msg));
+    }
+}
+
+export function* onGetCarStart(){
+    yield takeLatest(types.GET_CAR, getCar);
+}
+
 export function* carSagas() {
     yield all([
-        call(onGetCarsStart)
+        call(onGetCarsStart),
+        call(onGetCarStart)
     ]);
 }

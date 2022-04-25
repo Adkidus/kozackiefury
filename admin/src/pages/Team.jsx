@@ -13,6 +13,8 @@ import {GoPlus} from 'react-icons/go'
 export default function Team() {
     const dispatch = useDispatch();
     const team = useSelector((state) => state.team);
+    const auth = useSelector((state) => state.auth);
+    const isAdmin = auth.currentUser.role === 'admin';
     useEffect(()=>{
         dispatch(getUsers())
     },[dispatch])
@@ -22,12 +24,12 @@ export default function Team() {
                 <div className="title">
                     <h2>Team</h2>
                 </div>
-                <Link to='/team/new'>
+                {isAdmin?<Link to='/team/new'>
                     <ButtonOutline>
                         <GoPlus />
                         Dodaj
                     </ButtonOutline>
-                </Link>
+                </Link>:''}
             </div>
         </Card>
         <TeamList>
