@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { BiSearch } from "react-icons/bi";
 import * as color from '../styles/Colors';
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const auth = useSelector((state) => state.auth);
   return (
     <Nav>
       <div className="title">
-        <h4>Hi Admin,</h4>
+        <h4>Hi {auth.currentUser.first_name},</h4>
         <h1>
           Witaj w <span>KOZACKIEFURY !</span>
         </h1>

@@ -3,6 +3,7 @@ import types from './types';
 const INITIAL_STATE = {
     loading: false,
     carsList: [],
+    selectedCar: null,
     error: null,
 };
 
@@ -21,12 +22,17 @@ const carsReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
             };
         case types.GET_CARS_FAIL:
-                return{
-                    ...state,
-                    carsList: [],
-                    error: action.payload,
-                    loading: false,
-                }
+            return{
+                ...state,
+                carsList: [],
+                error: action.payload,
+                loading: false,
+            }
+        case types.SELECT_CAR:
+            return{
+                ...state,
+                selectedCar: action.payload,
+            }
         default:
             return state;
     }

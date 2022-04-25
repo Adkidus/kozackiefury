@@ -10,9 +10,9 @@ import {BsSpeedometer} from 'react-icons/bs'
 import {FiArrowRight} from 'react-icons/fi'
 import {GoPlus} from 'react-icons/go'
 import scrollreveal from "scrollreveal";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCars } from '../../store/cars/actions';
+import { getCars, selectCar } from '../../store/cars/actions';
 
 const CarSpecItem = ({title, value, icon}) => {
     return <div className='carSpecItem'>
@@ -31,8 +31,12 @@ const CarSpecItem = ({title, value, icon}) => {
 } 
 
 const CarsListItem = ({car}) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const open = () => {
-        console.log('open',car)
+        // console.log('open',car)
+        dispatch(selectCar(car))
+        navigate(`/car/${car._id}`)
     }
     return <CardListItem className='cardListItem'>
         <ListItem>
@@ -113,7 +117,7 @@ const Container = styled.div`
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
-    @media screen and (max-width: 1080px) {
+    @media screen and (max-width: 1440px) {
         grid-template-columns: repeat(1, 1fr);
     }
 `;
