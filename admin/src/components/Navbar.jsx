@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <Nav>
       <div className="title">
-        <h4>Hi {auth.currentUser.first_name},</h4>
+        <h4>Cześć {auth.currentUser.first_name},</h4>
         <h1>
           Witaj w <span>KOZACKIEFURY !</span>
         </h1>

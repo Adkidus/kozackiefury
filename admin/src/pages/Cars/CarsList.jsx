@@ -31,10 +31,10 @@ const CarSpecItem = ({title, value, icon}) => {
 } 
 
 const CarsListItem = ({car}) => {
+    const {brand, model, engine, horse_power, to_100} = car;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const open = () => {
-        // console.log('open',car)
         dispatch(selectCar(car))
         navigate(`/car/${car._id}`)
     }
@@ -42,17 +42,17 @@ const CarsListItem = ({car}) => {
         <ListItem>
             <div className='left'>
                 <div>
-                    <img src={car.photos[0]?.location} alt={car.brand} />
+                    <img src={car.photos[0]?.location} alt={brand} />
                 </div>
                 <div className='detail'>
                     <div className='header'>
-                        <h2>{car.brand}</h2>
-                        <h1>{car.model}</h1>
+                        <h2>{brand}</h2>
+                        <h1>{model}</h1>
                     </div>
                     <div className='carSpec'>
-                        <CarSpecItem title='silnik' value={car.engine} icon={<ImPower />} />
-                        <CarSpecItem title='moc' value={car.horse_power + 'KM'} icon={<GiHorseHead />} />
-                        <CarSpecItem title='0-100 km/h' value= {car.to_100 + 's'} icon={<BsSpeedometer />} />
+                        <CarSpecItem title='silnik' value={engine} icon={<ImPower />} />
+                        <CarSpecItem title='moc' value={horse_power + 'KM'} icon={<GiHorseHead />} />
+                        <CarSpecItem title='0-100 km/h' value= {to_100 + 's'} icon={<BsSpeedometer />} />
                     </div>
                 </div>
             </div>
