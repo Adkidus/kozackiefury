@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux';
 import styled from 'styled-components'
+import scrollreveal from "scrollreveal";
 import { Action, Actions, ButtonFill, ButtonOutline } from '../styles/Buttons'
 import { Card, CardItem, Wrap } from '../styles/Card'
 import { Input, LabelInput } from '../styles/Input'
@@ -95,6 +96,23 @@ const Profile = () => {
 }
 
 export default function Settings() {
+    useEffect(() => {
+        const sr = scrollreveal({
+          origin: "bottom",
+          distance: "80px",
+          duration: 2000,
+          reset: false,
+        });
+        sr.reveal(
+          `
+            .item
+        `,
+          {
+            opacity: 0,
+            interval: 100,
+          }
+        );
+    }, []);
     return <Section>
         <Card>
             <div className='header'>
@@ -105,11 +123,11 @@ export default function Settings() {
         </Card>
         <div className="grid">
             <Row>
-                <Col>
-                    <Profile />
+                <Col className='item'>
+                    <Profile/>
                 </Col>
-                <Col>
-                    <Password />
+                <Col className='item'>
+                    <Password/>
                 </Col>
             </Row>
         </div>
