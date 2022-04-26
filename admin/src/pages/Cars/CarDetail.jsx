@@ -7,13 +7,16 @@ import { Section } from '../../styles/Section'
 import { Card } from '../../styles/Card'
 import { ButtonOutline } from '../../styles/Buttons'
 import CarGallery from '../../components/CarDetail/CarGallery';
+import CarDetails from '../../components/CarDetail/CarDetails';
+import CarReservations from '../../components/CarDetail/CarReservations';
+import CarStats from '../../components/CarDetail/CarStats';
 
 const CarSection = ({car}) => {
     return <Section>
         <Card>
             <div className='header'>
                 <div className="title">
-                    <h2>Dane Samochodu</h2>
+                    <h2>Sczegóły</h2>
                 </div>
                 <Link to='/cars'>
                     <ButtonOutline>
@@ -25,10 +28,10 @@ const CarSection = ({car}) => {
         <div className='grid'>
             <div className='row__one'>
                 <CarGallery images={car.photos} />
-                <Card>szczegóły</Card>
+                <CarDetails car={car} />
             </div>
-            <Card>Rezerwacje</Card>
-            <Card>Statystyki</Card>
+            <CarReservations />
+            <CarStats />
         </div>
     </Section>
 }
