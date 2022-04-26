@@ -8,10 +8,14 @@ import { FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import scrollreveal from "scrollreveal";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {useSelector} from 'react-redux'
+import { useDispatch } from "react-redux";
+import { logOut } from "../store/auth/actions";
 
 export default function Sidebar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const [navbarState, setNavbarState] = useState(false);
   const html = document.querySelector("html");
@@ -45,6 +49,11 @@ export default function Sidebar() {
       }
     );
   }, []);
+
+  const logout = () => {
+    dispatch(logOut())
+    navigate('/login')
+  }
 
   return (
     <>
@@ -125,10 +134,10 @@ export default function Sidebar() {
           </div>
         </div>
         <div className="logout">
-          <Link to='/'>
+          <span onClick={logout}>
             <FiLogOut />
             <span className="logout">Wyloguj</span>
-          </Link>
+          </span>
         </div>
       </Section>
       <ResponsiveNav state={navbarState} className={navbarState ? "show" : ""}>
@@ -271,12 +280,13 @@ const Section = styled.section`
     &:hover {
       background-color: #a3823a;
     }
-    a {
+    span {
       text-decoration: none;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       color: white;
+      cursor: pointer;
     }
   }
   @media screen and (min-width: 280px) and (max-width: 1080px) {

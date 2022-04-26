@@ -66,6 +66,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 updateError: 'Błąd'
             }
         case types.LOG_OUT:
+            localStorage.removeItem('token')
             return INITIAL_STATE;
         default:
             return state;
