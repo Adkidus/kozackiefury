@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {useParams, Link} from 'react-router-dom'
+import {useParams, Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCar } from '../../store/cars/actions';
 
@@ -37,13 +37,24 @@ const CarSection = ({car}) => {
 }
 
 export default function CarDetail(){
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const params = useParams();
     const carId = params.id
     const cars = useSelector((state) => state.cars);
     useEffect(()=>{
-        if(!cars.selectedCar)
+        if(!cars.selectedCar && !cars.loading && !cars.error)
             dispatch(getCar({carId:carId}))
-    },[cars, dispatch, carId])
-    return cars.selectedCar ? <CarSection car={cars.selectedCar} /> : '';
+        else if(cars.error && !cars.loading)
+            navigate('/cars')
+    },[cars, dispatch, carId, navigate])
+    return <React.Fragment>
+    {
+        cars.loading? 'LOADING' :
+        cars.error? 'ERROR' : 
+        !cars.selectedCar ? <div style={{margin: '1rem', color: '#fff'}}>Brak danych</div>:
+        <CarSection car={cars.selectedCar} />
+    }
+    </React.Fragment>
+    //return cars.selectedCar ? <CarSection car={cars.selectedCar} /> : '';
 }

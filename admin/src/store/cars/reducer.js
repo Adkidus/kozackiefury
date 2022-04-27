@@ -28,9 +28,21 @@ const carsReducer = (state = INITIAL_STATE, action) => {
                 error: action.payload,
                 loading: false,
             }
+        case types.GET_CAR:
+            return {
+                ...state,
+                loading: true
+            }
+        case types.GET_CAR_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
         case types.SELECT_CAR:
             return{
                 ...state,
+                loading: false,
                 selectedCar: action.payload,
             }
         default:
