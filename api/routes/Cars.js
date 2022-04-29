@@ -117,4 +117,13 @@ router.post('/deleteImage', auth, async (req, res) => {
     }
 })
 
+router.get('/getList', async(req, res) => {
+    try {
+        const cars = await Car.find();
+        res.status(200).json(cars)
+    } catch (error) {
+        res.status(500).json({msg:'Error: ' + e.message});
+    }
+})
+
 module.exports = router;
