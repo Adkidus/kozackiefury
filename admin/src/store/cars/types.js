@@ -5,6 +5,7 @@ const carsTypes = {
     SELECT_CAR: 'SELECT_CAR',
     GET_CAR: 'GET_CAR',
     GET_CAR_FAIL: 'GET_CAR_FAIL',
+    UPDATE_CAR: 'UPDATE_CAR'
 };
   
 export default carsTypes;

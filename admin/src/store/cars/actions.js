@@ -28,3 +28,8 @@ export const getCarFail = (error) => ({
   type: types.GET_CAR_FAIL,
   payload: error
 });
+
+export const updateCar = (car) => ({
+  type: types.UPDATE_CAR,
+  payload: car
+});

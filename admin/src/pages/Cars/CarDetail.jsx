@@ -10,6 +10,7 @@ import CarGallery from '../../components/CarDetail/CarGallery';
 import CarDetails from '../../components/CarDetail/CarDetails';
 import CarReservations from '../../components/CarDetail/CarReservations';
 import CarStats from '../../components/CarDetail/CarStats';
+import CarServices from '../../components/CarDetail/CarServices';
 
 const CarSection = ({car}) => {
     return <Section>
@@ -30,6 +31,7 @@ const CarSection = ({car}) => {
                 <CarGallery images={car.photos} />
                 <CarDetails car={car} />
             </div>
+            <CarServices carID={car._id} services={car.services} />
             <CarReservations />
             <CarStats />
         </div>

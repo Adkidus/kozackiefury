@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { MdSpaceDashboard } from "react-icons/md";
-import { FaAddressCard, FaCar, FaWpforms } from "react-icons/fa";
+import { FaAddressCard, FaCar, FaWpforms, FaCalendarAlt } from "react-icons/fa";
 import {RiTeamFill} from 'react-icons/ri';
-import { IoSettings } from "react-icons/io5";
+import { IoSettings, IoPricetags } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
@@ -41,6 +41,8 @@ export default function Sidebar() {
       .links>ul>li:nth-of-type(4),
       .links>ul>li:nth-of-type(5),
       .links>ul>li:nth-of-type(6),
+      .links>ul>li:nth-of-type(7),
+      .links>ul>li:nth-of-type(8),
       .logout
       `,
       {
@@ -100,10 +102,18 @@ export default function Sidebar() {
                   <span> Rezerwacje</span>
                 </Link>
               </li>
+              <li
+                className={location.pathname.includes('calendar') ? "active" : "none"}
+              >
+                <Link to='/calendar'>
+                  <FaCalendarAlt />
+                  <span> Kalendarz</span>
+                </Link>
+              </li>
               {
                 isAdmin ?
                 <React.Fragment>
-                    <li
+                  <li
                     className={location.pathname.includes('asks') ? "active" : "none"}
                   >
                     <Link to='/asks'>
@@ -111,14 +121,22 @@ export default function Sidebar() {
                       <span> Zapytania</span>
                     </Link>
                   </li>
-                              <li
-              className={location.pathname.includes('team') ? "active" : "none"}
-            >
-              <Link to='/team'>
-                <RiTeamFill />
-                <span> Team</span>
-              </Link>
-            </li>
+                  <li
+                    className={location.pathname.includes('offer') ? "active" : "none"}
+                  >
+                    <Link to='/offer'>
+                      <IoPricetags />
+                      <span> Oferta</span>
+                    </Link>
+                  </li>
+                  <li
+                    className={location.pathname.includes('team') ? "active" : "none"}
+                  >
+                    <Link to='/team'>
+                      <RiTeamFill />
+                      <span> Team</span>
+                    </Link>
+                  </li>
                 </React.Fragment>
                 :''
               }
@@ -167,6 +185,14 @@ export default function Sidebar() {
                 <span> Rezerwacje</span>
               </Link>
             </li>
+            <li
+              className={location.pathname.includes('/calendar') ? "active" : "none"}
+            >
+              <Link to='/reservations'>
+                <FaCalendarAlt />
+                <span> Calendar</span>
+              </Link>
+            </li>
             {
               isAdmin ?
               <React.Fragment>
@@ -178,6 +204,14 @@ export default function Sidebar() {
                     <span> Zapytania</span>
                   </Link>
                 </li> 
+                <li
+                  className={location.pathname.includes('/offer') ? "active" : "none"}
+                >
+                  <Link to='/offer'>
+                    <IoPricetags />
+                    <span> Oferta</span>
+                  </Link>
+                </li>
                 <li
                   className={location.pathname.includes('/team') ? "active" : "none"}
                 >

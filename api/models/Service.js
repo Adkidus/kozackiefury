@@ -6,6 +6,7 @@ const ServiceSchema = new Schema({
         type: String,
         required: true
     },
+    time: String,
     description: String
 }, {
     timestamps: true

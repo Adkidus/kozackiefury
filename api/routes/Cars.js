@@ -31,6 +31,8 @@ const upload = multer({
 
 router.post('/new', auth, async (req, res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
         let newCar = req.body;
         let carPathName = `${newCar.brand} ${newCar.model} ${Math.random().toString(36).slice(2, 6)}`;
         newCar.pathName = carPathName.toLowerCase().split(' ').join('-')
@@ -44,6 +46,8 @@ router.post('/new', auth, async (req, res) => {
 
 router.post('/uploadImage/:carId', auth, upload.array('fileUpload'), async(req, res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
         const car = await Car.findOne({_id: req.params.carId})
         req.files.forEach(img => {
             car.photos.push({key: img.key, location: img.location})
@@ -59,6 +63,8 @@ router.post('/uploadImage/:carId', auth, upload.array('fileUpload'), async(req, 
 
 router.post('/update', auth, async(req, res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
         await Car.updateOne({_id: req.body._id},req.body);
         carUpdated = await Car.findOne({_id: req.body._id});
         res.status(200).json(carUpdated); 
@@ -102,6 +108,8 @@ router.get('/car/:pathName', auth, async (req, res) => {
 
 router.post('/deleteImage', auth, async (req, res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
         aws.s3.deleteObject({
             Bucket: aws.bucket,
             Key: req.body.photokey

@@ -13,6 +13,8 @@ router.get('/list', async (req, res) => {
 
 router.post('/new', async (req, res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
         const nservice = new Service(req.body)
         await nservice.save()
         res.status(201).send(nservice);
@@ -23,6 +25,8 @@ router.post('/new', async (req, res) => {
 
 router.post('/update', async (req, res) => {
     try {
+        if(req.user.role !== 'admin')
+            return res.status(403).json({msg: 'Brak Dostępu!'});
         await Service.updateOne({_id: req.body._id},req.body);
         serviceUpdated = await Service.findOne({_id: req.body._id});
         res.status(200).json(serviceUpdated); 

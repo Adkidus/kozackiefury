@@ -60,7 +60,7 @@ const CarSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-      }
+    }
 }, {
     timestamps: true
 });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Sidebar from "./components/Sidebar";
 import {
@@ -14,6 +14,8 @@ import Reservations from "./pages/Reservations";
 import CarsList from "./pages/Cars/CarsList";
 import CarDetail from "./pages/Cars/CarDetail";
 import Team from "./pages/Team";
+import Calendar from "./pages/Calendar";
+import Offer from "./pages/Offer";
 import Settings from "./pages/Settings";
 import CarNew from "./pages/Cars/CarNew";
 import LoginPage from "./pages/LoginPage";
@@ -25,6 +27,8 @@ import { authStart } from './store/auth/actions';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ModalContext } from "./Providers/ModalContext";
+import ModalWindow from "./components/Modal";
 
 const WithoutNav = () => <Outlet />;
 
@@ -37,8 +41,11 @@ const ProtectedRoute = ({children}) => {
 }
 
 export default function App() {
+  const [modalDetail, setModalDetail] = useState({display:false, content:null});
+  const modalValue = { modalDetail, setModalDetail };
   return (
     <Provider store={store}>
+      <ModalContext.Provider value={modalValue}>
       <Div>
         <Router>
           <Routes>
@@ -75,10 +82,22 @@ export default function App() {
                 <Reservations />
               </ProtectedRoute>
             }/>
+            <Route path="calendar" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Calendar />
+              </ProtectedRoute>
+            }/>
             <Route path="asks" element={
               <ProtectedRoute>
                 <Sidebar />
                 <Asks />
+              </ProtectedRoute>
+            }/>
+            <Route path="offer" element={
+              <ProtectedRoute>
+                <Sidebar />
+                <Offer />
               </ProtectedRoute>
             }/>
             <Route path="team" element={
@@ -104,6 +123,8 @@ export default function App() {
         </Router>
       </Div>
       <ToastContainer limit={3} />
+      <ModalWindow />
+      </ModalContext.Provider>
     </Provider>
   );
 }

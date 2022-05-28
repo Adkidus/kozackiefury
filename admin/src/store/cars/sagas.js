@@ -4,7 +4,8 @@ import {
     getCarsSuccess,
     getCarsFail,
     selectCar,
-    getCarFail
+    getCarFail,
+    updateCar
 } from './actions';
 import types from './types';
 
@@ -44,9 +45,22 @@ export function* onGetCarStart(){
     yield takeLatest(types.GET_CAR, getCar);
 }
 
+export function* updateSingleCar({ payload }){
+    try {
+        yield put(updateCar(payload));
+    } catch (error) {
+        yield put(getCarFail(error.response.data.msg));
+    }
+}
+
+export function* unCarUpdate(){
+    yield takeLatest(types.UPDATE_CAR, updateSingleCar);
+}
+
 export function* carSagas() {
     yield all([
         call(onGetCarsStart),
-        call(onGetCarStart)
+        call(onGetCarStart),
+        call(unCarUpdate)
     ]);
 }

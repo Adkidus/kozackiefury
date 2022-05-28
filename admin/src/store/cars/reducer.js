@@ -45,6 +45,12 @@ const carsReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 selectedCar: action.payload,
             }
+        case types.UPDATE_CAR:
+            return{
+                ...state,
+                loading: false,
+                selectedCar: action.payload,
+            }
         default:
             return state;
     }
