@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = async function(req, res, next) {
+  if(!req.header('Authorization'))
+    return res.status(401).json({ msg: 'No token, authorization denied' });
+
   const token = req.header('Authorization').replace('Bearer ','');
   if (!token) {
     return res.status(401).json({ msg: 'No token, authorization denied' });
