@@ -2,31 +2,54 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const auth = require('../middleware/auth');
-const multer = require('multer')
-const multerS3 = require('multer-s3')
-const aws = require('../config/aws');
+// const multer = require('multer')
+// const multerS3 = require('multer-s3')
+// const aws = require('../config/aws');
 const Car = require('../models/Car');
 
-const upload = multer({
-    storage: multerS3({
-      s3: aws.s3,
-      bucket: aws.bucket,
-      acl: 'public-read',
-      contentType: multerS3.AUTO_CONTENT_TYPE,
-      metadata: function (req, file, cb) {
-        cb(null, {fieldName: file.fieldname});
-      },
-      key: function (req, file, cb) {
-        let fileObj = {
-            "image/png": ".png",
-            "image/jpeg": ".jpeg",
-            "image/jpg": ".jpg",
-            "image/webp": ".webp"
-        };
-        let fileName = Date.now().toString()+fileObj[file.mimetype];
-        cb(null, fileName)
-      }
-    })
+const multer = require('multer');
+// const sharp = require('sharp');
+const SharpMulter  =  require("sharp-multer");
+const fs = require('fs');
+
+// const upload = multer({
+//     storage: multerS3({
+//       s3: aws.s3,
+//       bucket: aws.bucket,
+//       acl: 'public-read',
+//       contentType: multerS3.AUTO_CONTENT_TYPE,
+//       metadata: function (req, file, cb) {
+//         cb(null, {fieldName: file.fieldname});
+//       },
+//       key: function (req, file, cb) {
+//         let fileObj = {
+//             "image/png": ".png",
+//             "image/jpeg": ".jpeg",
+//             "image/jpg": ".jpg",
+//             "image/webp": ".webp"
+//         };
+//         let fileName = Date.now().toString()+fileObj[file.mimetype];
+//         cb(null, fileName)
+//       }
+//     })
+// })
+
+const storage = SharpMulter({
+    destination: (req, file, cb) => {
+        const directory = `./public/uploads/cars`
+        if (!fs.existsSync(directory)) {
+            fs.mkdirSync(directory, { recursive: true })
+        }
+        cb(null, directory)
+    },
+    imageOptions:{
+        fileFormat: "webp",
+        quality: 80,
+        useTimestamp: true,
+    },
+})
+const upload = multer({ 
+    storage
 })
 
 router.post('/new', auth, async (req, res) => {
@@ -48,14 +71,21 @@ router.post('/uploadImage/:carId', auth, upload.array('fileUpload'), async(req, 
     try {
         if(req.user.role !== 'admin')
             return res.status(403).json({msg: 'Brak Dostępu!'});
-        const car = await Car.findOne({_id: req.params.carId})
-        req.files.forEach(img => {
-            car.photos.push({key: img.key, location: img.location})
-        });
+        // const car = await Car.findOne({_id: req.params.carId})
+        // req.files.forEach(img => {
+        //     car.photos.push({key: img.key, location: img.location})
+        // });
         //        car.photos.push({key: req.files[0].key, location: req.files[0].location})
-        await car.save()
+
+        const images = [...req.files]
+        let photos = []
+        images.forEach(e => photos.push({key: req.files[0].key, location: process.env.IMG_URL + e.path}))
+        await Car.findOneAndUpdate(
+            { _id: req.params.carId }, 
+            { photos, main_photo: photos[0].location })
+
         //'Successfully uploaded ' + req.files.length + ' files!'
-        res.status(201).send(car);
+        res.status(201).send('Successfully uploaded');
     } catch (e) {
         res.status(500).json({msg:'Error: ' + e.message});
     }
@@ -110,13 +140,13 @@ router.post('/deleteImage', auth, async (req, res) => {
     try {
         if(req.user.role !== 'admin')
             return res.status(403).json({msg: 'Brak Dostępu!'});
-        aws.s3.deleteObject({
-            Bucket: aws.bucket,
-            Key: req.body.photokey
-        }, function(err, data) {
-            if (err)  
-                res.status(500).json(err);
-        });
+        // aws.s3.deleteObject({
+        //     Bucket: aws.bucket,
+        //     Key: req.body.photokey
+        // }, function(err, data) {
+        //     if (err)  
+        //         res.status(500).json(err);
+        // });
         await Car.updateOne({_id: req.body.car._id},req.body.car);
         carUpdated = await Car.findOne({_id: req.body.car._id});
         res.status(200).json(carUpdated); 

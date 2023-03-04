@@ -1,0 +1,35 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "env-cmd -f ./config/dev.env node server",
+    "server": "env-cmd -f ./config/dev.env nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apicache": "^1.6.3",
+    "aws-sdk": "^2.1223.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "deepl": "^1.0.13",
+    "dotenv": "^16.0.1",
+    "easyinvoice": "^2.3.3",
+    "env-cmd": "^10.1.0",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.6",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.7.7",
+    "sharp-multer": "^0.2.5"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.15"
+  }
+}
