@@ -1,6 +1,5 @@
 import { NextSeo } from 'next-seo';
 import Image from 'next/image'
-import CallToActionWithVideo from '../components/Hero'
 
 const CarsPage = () => {
   return (
