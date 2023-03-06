@@ -2,7 +2,7 @@ import { Flex, Heading, Text, Box, Icon, Card, CardBody, Container } from "@chak
 import Image from "next/image";
 
 import headerImg from '../assets/header.png';
-import headerFull from '../assets/headerFull.jpeg';
+import headerFull from '../assets/headerfull.jpeg';
 
 export default function Header() {
 

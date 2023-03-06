@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 
-import headerImg from '../assets/header.png';
-import headerFull from '../assets/headerFull.jpeg';
 import logoBlack from '../assets/logoblack.jpeg';
 
 function FadeInWhenVisible({ children }) {
