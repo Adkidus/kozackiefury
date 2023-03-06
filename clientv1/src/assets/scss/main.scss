@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&display=swap');
+
+@import './colors';
+@import './buttons';
+@import './forms';
+@import './navbar';
+@import './header';
+@import './card';
+@import './headerSingle';
+@import './gallery';
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.dark-bg{
+    background-color: #0c0c0c;
+    background-image: linear-gradient(#0c0c0c,#212121);
+    color: $white;
+}
+
+.home-cars{
+    h1{
+        font-weight: 700;
+        color: $gold;
+    }
+    h3{
+        color: $gold;
+    }
+}
+
+.full-page{
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+    background-color: black;
+}
+
+.order-form{
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.9);
+}

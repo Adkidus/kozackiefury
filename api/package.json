@@ -1,0 +1,39 @@
+{
+  "name": "kozackiefury",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "env-cmd -f ./config/dev.env node server",
+    "server": "env-cmd -f ./config/dev.env nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adkidus/kozackiefury.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Adkidus/kozackiefury/issues"
+  },
+  "homepage": "https://github.com/Adkidus/kozackiefury#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1046.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.1",
+    "config": "^3.3.6",
+    "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.1",
+    "multer": "^1.4.4",
+    "multer-s3": "^2.10.0",
+    "nodemailer": "^6.7.2",
+    "sharp-multer": "^0.2.5"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.15"
+  }
+}

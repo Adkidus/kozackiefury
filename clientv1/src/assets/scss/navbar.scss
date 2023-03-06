@@ -1,0 +1,17 @@
+.navbar{
+    border-bottom: 1px solid $gold;
+    &-brand{
+        a{
+            color: $gold !important;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    }
+    &-link{
+        color: $white !important;
+        text-transform: uppercase;
+        font-weight: 500;
+        text-decoration: none;
+    }
+}
