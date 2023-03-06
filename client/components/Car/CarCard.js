@@ -51,8 +51,8 @@ const CarCard = () => {
                         bgGradient='linear(to-r, rgb(163, 130, 58), transparent)'
                         color={'#fff'}
                         p={1}
-                        pr={6}
-                        fontSize={'xs'}
+                        pr={10}
+                        fontSize={'sm'}
                     >
                         <Text>Cena od:</Text>
                         <Text fontWeight={'bold'}>1000zl</Text>

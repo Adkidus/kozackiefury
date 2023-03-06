@@ -9,7 +9,7 @@ const theme = extendTheme({
   initialColorMode: 'dark',
   useSystemColorMode: false,
   fonts: {
-
+    heading: adventPro.style.fontFamily,
     body: adventPro.style.fontFamily,
   },
   styles: {

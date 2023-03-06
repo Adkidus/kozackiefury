@@ -1,5 +1,6 @@
 import About from '@/components/About';
 import CarCard from '@/components/Car/CarCard';
+import ContactForm from '@/components/Forms/Contact';
 import Header from '@/components/Header';
 import { Box, Container, SimpleGrid, Flex, Heading, Text } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
@@ -34,6 +35,7 @@ const IndexPage = () => {
           <CarCard />
         </SimpleGrid>
       </Container>
+      <ContactForm />
     </>
   )
 }
