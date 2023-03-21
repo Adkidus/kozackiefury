@@ -1,4 +1,7 @@
 import { Box, Container, FormLabel, Flex, Heading, Text, Input, FormControl, Textarea, Button } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 export default function RentForm(){
 
