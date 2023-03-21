@@ -7,7 +7,6 @@ import {
     Stack,
     Collapse,
     Icon,
-    Link,
     Popover,
     PopoverTrigger,
     PopoverContent,
@@ -23,6 +22,7 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
 } from "@chakra-ui/icons";
+import {Link} from '@chakra-ui/next-js';
 
 import logo from '../assets/logo.png';
 
@@ -58,7 +58,9 @@ export default function Navbar() {
         </Flex>
         <Container maxW={'8xl'}>
             <Flex flex={{ base: 1 }} justify={{ base: "center", md: "space-between" }}>
-                <Image src={logo.src} alt="logo" w={'10rem'} maxH='100%' />
+                <Link href='/'>
+                  <Image src={logo.src} alt="logo" w={'10rem'} maxH='100%' />
+                </Link>
                 <Flex display={{ base: "none", md: "flex" }} alignItems={'center'} justifyContent={'center'}> 
                     <DesktopNav />
                 </Flex>
@@ -145,7 +147,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue("white", "gray.800")}
+      bg={'#000'}
       p={4}
       display={{ md: "none" }}
     >
@@ -173,7 +175,7 @@ const MobileNavItem = ({ label, children, href }) => {
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
+          color={'rgb(163, 130, 58)'}
         >
           {label}
         </Text>
@@ -212,14 +214,14 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "NASZA FLOTA",
-    href: "#",
+    href: "cars",
   },
-  {
-    label: "WSPÓŁPRACA I REALIZACJE",
-    href: "#",
-  },
-  {
-    label: "KONTAKT",
-    href: "#",
-  },
+  // {
+  //   label: "WSPÓŁPRACA I REALIZACJE",
+  //   href: "#",
+  // },
+  // {
+  //   label: "KONTAKT",
+  //   href: "/#contact",
+  // },
 ];

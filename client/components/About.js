@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { motion, useAnimation } from "framer-motion";
 
 import logoBlack from '../assets/logoblack.jpeg';
+import logoKozackieFury from '../assets/logo-kozackie-fury.svg';
 
 function FadeInWhenVisible({ children }) {
     const controls = useAnimation();
@@ -33,35 +34,39 @@ function FadeInWhenVisible({ children }) {
 }
 
 const About = () => {
-    return <Container maxW={'8xl'}>
+    return <Container maxW={'8xl'} my={12}>
         <Flex flexFlow={{base: 'column', lg: 'row'}} minH={'35vh'}>
-            <Flex flex={3} justifyContent={'center'} alignItems={'center'}>
+            <Flex flex={1} justifyContent={'center'} alignItems={'center'}>
                 <Box>
-                    <FadeInWhenVisible>
+                    <>
                         <Heading color={'rgb(163, 130, 58)'}>O FIRMIE</Heading>
                         <Box width={'7rem'} height={'1px'} backgroundColor={'#a3823a'}></Box>
-                    </FadeInWhenVisible>
-                    <FadeInWhenVisible>
+                    </>
+                    <>
                         <Text textAlign={'justify'} mt={'1.5rem'}>Kozackie Fury to marka, która z pewnością spełni oczekiwania każdego, kto poszukuje wyjątkowego pojazdu na swoje wydarzenie. Jako specjaliści w dziedzinie wynajmu samochodów, oferujemy Państwu najwyższą jakość obsługi i niepowtarzalne doświadczenia, które będą wspomnieniem na całe życie. Nasza oferta jest niezwykle różnorodna i dostosowana do potrzeb klientów. Posiadamy w swojej flocie klasyczne Fury, eleganckie limuzyny oraz te nieokiełznane, piekielnie szybkie samochody, które dostarczą dawkę adrenaliny i emocji.</Text>
-                    </FadeInWhenVisible>
-                    <FadeInWhenVisible>
+                    </>
+                    <>
                         <Text textAlign={'justify'} mt={'1rem'}>Nasza nazwa mówi sama za siebie - Kozackie Fury to synonim prestiżu, szybkości i luksusu. Jesteśmy dumni z tego, co robimy i nie akceptujemy kompromisów. Nasza oferta jest przejrzysta i prosta, a umowy są jasne i zrozumiałe dla każdego. W Kozackie Fury nie tylko wynajmujemy samochody, ale tworzymy z naszymi klientami wyjątkową społeczność. Chcemy, aby każdy, kto zdecyduje się na nasze usługi, poczuł się jak w rodzinie. Nasze oferty są zawsze zindywidualizowane, by sprostać wymaganiom i oczekiwaniom każdego klienta </Text>
-                    </FadeInWhenVisible>
-                    <FadeInWhenVisible>
+                    </>
+                    <>
                        <Text textAlign={'justify'} mt={'1rem'}>Różne oferty wynajmu pozwalają dostosować usługę do indywidualnych potrzeb klienta. Możesz zdecydować się na samodzielne prowadzenie samochodu lub wynająć szofera, który zadba o Twoje bezpieczeństwo i wygodę.</Text>
-                    </FadeInWhenVisible>
+                    </>
                     {/* <Text textAlign={'justify'} mt={'1rem'}>Dostarczamy nasze Fury do każdego miejsca wskazanego przez klienta, niezależnie od tego, gdzie odbywa się wydarzenie. Dzięki temu możemy zapewnić naszym klientom pełną swobodę i komfort podczas organizacji imprezy.Razem z naszymi klientami tworzymy coś więcej niż tylko wynajem - tworzymy wspomnienia, które pozostaną w pamięci na zawsze. Dlatego, jeśli szukasz niepowtarzalnej Fury, która spełni Twoje marzenia i oczekiwania, to Kozackie Fury są dla Ciebie idealnym wyborem.</Text>
                     <Text textAlign={'justify'} mt={'1rem'}>Celem naszej firmy na przyszłość jest nieustanny rozwój i odkrywanie nowych, nietuzinkowych obszarów. Będziemy dążyć do kreowania trendów oraz tworzenia ofert, które będą wyznaczać nowe granice i zawierać innowacyjne rozwiązania. Nasza nazwa odzwierciedla naszą determinację do bycia pionierami i eksploratorami w branży. Naszym celem jest stanie się liderem na rynku poprzez stały rozwój i nieustanne dążenie do doskonałości.</Text> */}
                 </Box>
             </Flex>
-            <Flex flex={1} justifyContent={'center'} alignItems={'center'} position={'relative'} w={'full'} mt={{base: '5rem', lg: '3rem'}} pl={'2rem'}>
-                <Blob
+            <Flex flex={1} justifyContent={'center'} alignItems={'center'} position={'relative'} w={'full'} mt={{base: '5rem', lg: '3rem'}} px={'2rem'}>
+              <Flex>
+              <Image src={logoKozackieFury.src} alt="logo" objectFit="cover" fill />
+              </Flex>
+            
+                {/* <Blob
                     width={'100%'}
                     height={'100%'}
                     left={0}
                     zIndex={-1}
                     color={'rgb(163, 130, 58)'}
-                />
+                /> */}
                 {/* <Card position={'absolute'}  w={'70%'} h={'350px'} bg={'transparent'}>
                     <CardBody p={0} bg={'transparent'}>
                         <Image src={headerImg.src} alt='header logo' objectFit="cover"  layout='fill' style={{borderRadius: '2rem'}} />

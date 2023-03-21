@@ -2,33 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-    car: {
-        carId:  {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Car'
-        },
-        pathName: String,
-        carName: String,
-        photo: String,
+    carId:  {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Car'
     },
-    first_name: {
+    person: {
         type: String,
         required: true,
     },
-    last_name: String,
     email: {
         type: String,
         required: true,
     },
     phone: String,
-    rent_for_subject: String,
-    company: {
-        name: String,
-        nip: String,
-        address: String,
-        city: String,
-        postal_code: String,
-    },
     service:{
         title: String,
         price: String,
