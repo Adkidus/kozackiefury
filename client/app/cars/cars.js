@@ -4,7 +4,6 @@ import CarCard from "../../components/Car/CarCard";
 import { Container, SimpleGrid } from "@chakra-ui/react";
 
 export default function CarsComponent({cars}) {
-    console.log(cars)
     return <>
         <main>
             <Container maxW={'7xl'}>
