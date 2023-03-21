@@ -8,7 +8,7 @@ import Gallery from "../components/Gallery"
 export default function Page() {
   return <>
   <Box position={'relative'} display={'grid'} height={{base: '40vh', md: '70vh'}} width={'100vw'} margin={'0 auto'} bg={'#000'} placeItems={'center'}>
-    <video className="fullscreen" autoPlay muted playsinline>
+    <video className="fullscreen" autoPlay muted playsInline>
       <source src="/kozackiefury.mp4" type="video/mp4" />
       <source src="/kozackiefury.webm" type="video/webm" />
     </video>
