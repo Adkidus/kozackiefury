@@ -147,7 +147,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
 const MobileNav = () => {
   return (
     <Stack
-      bg={useColorModeValue("white", "gray.800")}
+      bg={'#000'}
       p={4}
       display={{ md: "none" }}
     >
@@ -175,7 +175,7 @@ const MobileNavItem = ({ label, children, href }) => {
       >
         <Text
           fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
+          color={'rgb(163, 130, 58)'}
         >
           {label}
         </Text>
