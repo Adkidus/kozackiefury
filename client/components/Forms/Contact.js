@@ -31,7 +31,7 @@ function FadeInWhenVisible({ children }) {
 }
 
 const ContactForm = () => {
-    return <Container my={12} mt={14} maxW={'8xl'}>
+    return <Container my={12} my={14} maxW={'8xl'}>
         <Box>
             <FadeInWhenVisible>
                 <Heading color={'rgb(163, 130, 58)'}>KONTAKT</Heading>

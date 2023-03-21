@@ -125,9 +125,9 @@ router.get('/byId/:carId', async (req, res) => {
     }
 })
 
-router.get('/car/:pathName', auth, async (req, res) => {
+router.get('/car/:pathName', async (req, res) => {
     try {
-        const thisCar = await Car.findOne({pathName: req.params.pathName})
+        const thisCar = await Car.find({pathName: req.params.pathName})
         if(!thisCar)
             return res.status(404).send('NOT FOUND'); 
         res.status(200).json(thisCar); 

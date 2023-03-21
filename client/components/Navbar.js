@@ -7,7 +7,6 @@ import {
     Stack,
     Collapse,
     Icon,
-    Link,
     Popover,
     PopoverTrigger,
     PopoverContent,
@@ -23,6 +22,7 @@ import {
     ChevronDownIcon,
     ChevronRightIcon,
 } from "@chakra-ui/icons";
+import {Link} from '@chakra-ui/next-js';
 
 import logo from '../assets/logo.png';
 
@@ -58,7 +58,9 @@ export default function Navbar() {
         </Flex>
         <Container maxW={'8xl'}>
             <Flex flex={{ base: 1 }} justify={{ base: "center", md: "space-between" }}>
-                <Image src={logo.src} alt="logo" w={'10rem'} maxH='100%' />
+                <Link href='/'>
+                  <Image src={logo.src} alt="logo" w={'10rem'} maxH='100%' />
+                </Link>
                 <Flex display={{ base: "none", md: "flex" }} alignItems={'center'} justifyContent={'center'}> 
                     <DesktopNav />
                 </Flex>
@@ -212,7 +214,7 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "NASZA FLOTA",
-    href: "#",
+    href: "cars",
   },
   {
     label: "WSPÓŁPRACA I REALIZACJE",
@@ -220,6 +222,6 @@ const NAV_ITEMS = [
   },
   {
     label: "KONTAKT",
-    href: "#",
+    href: "/#contact",
   },
 ];
