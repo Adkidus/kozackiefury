@@ -216,12 +216,12 @@ const NAV_ITEMS = [
     label: "NASZA FLOTA",
     href: "cars",
   },
-  {
-    label: "WSPÓŁPRACA I REALIZACJE",
-    href: "#",
-  },
-  {
-    label: "KONTAKT",
-    href: "/#contact",
-  },
+  // {
+  //   label: "WSPÓŁPRACA I REALIZACJE",
+  //   href: "#",
+  // },
+  // {
+  //   label: "KONTAKT",
+  //   href: "/#contact",
+  // },
 ];

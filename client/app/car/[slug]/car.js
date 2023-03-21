@@ -45,7 +45,7 @@ export default function CarComponent({car}) {
                     </Text>
                 </Flex>
             </Flex>
-            <RentForm />
+            <RentForm carID={car._id} />
         </Container>
     </>
 }
