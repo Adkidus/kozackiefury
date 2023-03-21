@@ -8,7 +8,7 @@ const nextConfig = {
     domains: ['images.unsplash.com', 'api.kozackiefury.pl']
   },
   env: {
-    apiURL: 'http://localhost:5001/',
+    apiURL: 'https://api.kozackiefury.pl/',
   },
 }
 
