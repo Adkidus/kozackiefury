@@ -1,8 +1,7 @@
 "use client";
 
 import Carousel from "../../../components/Carousel";
-import { Box, Container, SimpleGrid, Flex, Heading, Text, Divider } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Box, Container, Flex, Heading, Text, Divider } from "@chakra-ui/react";
 import RentForm from "../../../components/Forms/Rent";
 import CountUp from 'react-countup';
 

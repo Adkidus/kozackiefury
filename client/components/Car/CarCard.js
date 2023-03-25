@@ -50,7 +50,7 @@ const CarCard = ({car, hideBrand}) => {
                         alt={`${car.brand} ${car.model}`}
                         loading={'lazy'}
                         layout='fill'
-                        objectFit='cover'
+                        objectFit='contain'
                     />
                     {/* <Box 
                         className="cp-price"
