@@ -35,8 +35,8 @@ const theme = extendTheme({
 export default function RootLayout({children }) {
   return (
     <html lang='en'>
-      <Script strategy="lazyOnload" async src="https://www.googletagmanager.com/gtag/js?id=G-Y1Q1G1TB58"></Script>
-      <Script strategy="lazyOnload" dangerouslySetInnerHTML={{
+      <Script id="gtagURL" strategy="lazyOnload" async src="https://www.googletagmanager.com/gtag/js?id=G-Y1Q1G1TB58"></Script>
+      <Script id="gtag" strategy="lazyOnload" dangerouslySetInnerHTML={{
         __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
