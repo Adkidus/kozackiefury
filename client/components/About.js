@@ -39,7 +39,7 @@ const About = () => {
             <Flex flex={1} justifyContent={'center'} alignItems={'center'}>
                 <Box>
                     <>
-                        <Heading color={'rgb(163, 130, 58)'}>O FIRMIE</Heading>
+                        <Heading color={'rgb(163, 130, 58)'}>O NAS</Heading>
                         <Box width={'7rem'} height={'1px'} backgroundColor={'#a3823a'}></Box>
                     </>
                     <>
