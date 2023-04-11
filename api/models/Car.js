@@ -20,6 +20,9 @@ const CarSchema = new Schema({
     to_100: {
         type: String
     },
+    vmax: {
+        type: Number
+    },
     description: String,
     category: String,
     main_photo: String,
@@ -33,16 +36,10 @@ const CarSchema = new Schema({
     }],
     services: [
         {
-            time: {
-                type: String
-            },
+            time: String,
             price: String,
-            title: {
-                type: String
-            },
-            description: {
-                type: String
-            }
+            title: String,
+            description: String,
         }
     ],
     active: { 
@@ -60,7 +57,8 @@ const CarSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    reservations: [String]
 }, {
     timestamps: true
 });

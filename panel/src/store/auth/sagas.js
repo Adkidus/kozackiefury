@@ -47,10 +47,12 @@ export function* authToken(){
         setAuthToken(authToken)
         yield put(authSuccess(user));
     } catch (error) {
-        let err = null
+        let err = 'abc'
         if(localStorage.getItem('token')){
             setAuthToken()
             err = 'Sesja wygasła'
+        }else{
+            err = 'Empty token';
         }
         yield put(authFailure(err));
     }

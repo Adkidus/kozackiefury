@@ -22,10 +22,10 @@ router.post('/register', auth, async(req,res) => {
     try {
         if(req.user.role !== 'admin')
             return res.status(403).json({msg: 'Brak Dostępu!'});
-        const { email, password, role, first_name, last_name, phone } = req.body;
+        const { email, password, first_name, last_name, phone } = req.body;
         let user = await User.findOne({ email });
         if (user) return res.status(400).json({ msg: 'Adres E-mail jest już zajęty.' });
-        user = new User({ email, password, role, first_name, last_name, phone});
+        user = new User({ email, password, first_name, last_name, phone});
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
         await user.save(function (err) {

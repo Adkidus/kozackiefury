@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-    carId:  {
+    carID:  {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car'
+        ref: 'Car',
+        required: true,
     },
     person: {
         type: String,
